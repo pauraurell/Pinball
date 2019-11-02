@@ -39,8 +39,7 @@ bool ModulePhysics::Start()
 	int x = 1;
 	int y = 1;
 	
-	const int size_pinball = 62;
-	int pinball[size_pinball] = {
+	int pinball[62] = {
 		270, 8,
 		339, 16,
 		397, 38,
@@ -73,30 +72,13 @@ bool ModulePhysics::Start()
 		144, 41,
 		203, 18
 	};
-
-	const int size_pillShape = 16;
-	int pillShape[size_pillShape] = {
-		288, 88,
-		288, 125,
-		293, 131,
-		302, 131,
-		308, 125,
-		308, 88,
-		303, 80,
-		294, 80
-	};
-
-	CreateChain(x, y, pinball, size_pinball, b2_staticBody);
-	CreateChain(x-1, y-1, pillShape, size_pillShape, b2_staticBody);
-	CreateChain(x+45, y-6, pillShape, size_pillShape, b2_staticBody);
+	int size = 62;
+	CreateChain(x, y, pinball, size, b2_staticBody);
+	
 	CreateCircle(277, 178, 23, b2_staticBody);
 	CreateCircle(335, 236, 23, b2_staticBody);
 
-	int size = 62;
-	CreateChain(x, y, pinball, size, b2_staticBody);
-
-
-	int collider1[18] = {
+	int triangleLeft[18] = {
 		93, 759,
 		89, 746,
 		89, 689,
@@ -108,9 +90,9 @@ bool ModulePhysics::Start()
 		140, 782
 	};
 	size = 18;
-	CreateChain(x, y, collider1, size, b2_staticBody);
+	CreateChain(x, y, triangleLeft, size, b2_staticBody);
 
-	int collider2[20] = {
+	int triangleRight[20] = {
 		401, 759,
 		405, 749,
 		404, 693,
@@ -123,9 +105,9 @@ bool ModulePhysics::Start()
 		356, 780
 	};
 	size = 20;
-	CreateChain(x, y, collider2, size, b2_staticBody);
+	CreateChain(x, y, triangleRight, size, b2_staticBody);
 
-	int collider3[20] = {
+	int leftWall[20] = {
 		48, 686,
 		54, 686,
 		54, 770,
@@ -138,9 +120,9 @@ bool ModulePhysics::Start()
 		48, 771
 	};
 	size = 20;
-	CreateChain(x, y, collider3, size, b2_staticBody);
+	CreateChain(x, y, leftWall, size, b2_staticBody);
 
-	int collider4[20] = {
+	int rightWall[20] = {
 		431, 686,
 		439, 686,
 		439, 778,
@@ -153,9 +135,9 @@ bool ModulePhysics::Start()
 		430, 750
 	};
 	size = 20;
-	CreateChain(x, y, collider4, size, b2_staticBody);
+	CreateChain(x, y, rightWall, size, b2_staticBody);
 
-	int collider5[102] = {
+	int mapCollider1[102] = {
 	71, 390,
 	60, 336,
 	53, 285,
@@ -209,9 +191,9 @@ bool ModulePhysics::Start()
 	71, 398
 	};
 	size = 102;
-	CreateChain(x, y, collider5, size, b2_staticBody);
+	CreateChain(x, y, mapCollider1, size, b2_staticBody);
 
-	int collider6[58] = {
+	int mapCollider2[58] = {
 		297, 336,
 		298, 345,
 		305, 346,
@@ -243,9 +225,9 @@ bool ModulePhysics::Start()
 		307, 292
 	};
 	size = 58;
-	CreateChain(x, y, collider6, size, b2_staticBody);
+	CreateChain(x, y, mapCollider2, size, b2_staticBody);
 
-	int collider7[50] = {
+	int mapCollider3[50] = {
 		464, 305,
 		468, 296,
 		480, 262,
@@ -273,22 +255,9 @@ bool ModulePhysics::Start()
 		463, 307
 	};
 	size = 50;
-	CreateChain(x, y, collider7, size, b2_staticBody);
+	CreateChain(x, y, mapCollider3, size, b2_staticBody);
 
-	int collider8[16] = {
-		288, 85,
-		294, 81,
-		301, 81,
-		306, 85,
-		306, 125,
-		302, 130,
-		294, 130,
-		288, 125
-	};
-	size = 16;
-	CreateChain(x, y, collider8, size, b2_staticBody);
-
-	int collider9[16] = {
+	int Pills[16] = {
 		335, 80,
 		340, 74,
 		349, 74,
@@ -299,7 +268,8 @@ bool ModulePhysics::Start()
 		335, 120
 	};
 	size = 16;
-	CreateChain(x - 1, y, collider9, size, b2_staticBody);
+	CreateChain(x - 1, y, Pills, size, b2_staticBody);
+	CreateChain(x - 48, y + 5, Pills, size, b2_staticBody);
 
 	return true;
 }
