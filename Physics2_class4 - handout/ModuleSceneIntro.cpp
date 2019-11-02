@@ -29,6 +29,7 @@ bool ModuleSceneIntro::Start()
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	hit_fx = App->audio->LoadFx("pinball/hit.ogg");
 	background = App->textures->Load("pinball/Pinball_Sritesheet.png");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
@@ -175,8 +176,7 @@ update_status ModuleSceneIntro::Update()
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
-
-	App->audio->PlayFx(bonus_fx);
+	App->audio->PlayFx(hit_fx);
 
 	/*
 	if(bodyA)
