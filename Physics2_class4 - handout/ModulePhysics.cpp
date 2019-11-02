@@ -73,6 +73,7 @@ bool ModulePhysics::Start()
 		144, 41,
 		203, 18
 	};
+
 	const int size_pillShape = 16;
 	int pillShape[size_pillShape] = {
 		288, 88,
@@ -90,6 +91,69 @@ bool ModulePhysics::Start()
 	CreateChain(x+45, y-6, pillShape, size_pillShape, b2_staticBody);
 	CreateCircle(277, 178, 23, b2_staticBody);
 	CreateCircle(335, 236, 23, b2_staticBody);
+
+	int size = 62;
+	CreateChain(x, y, pinball, size, b2_staticBody);
+
+
+	int collider1[18] = {
+		93, 759,
+		89, 746,
+		89, 689,
+		94, 685,
+		101, 686,
+		150, 774,
+		150, 778,
+		145, 782,
+		140, 782
+	};
+	size = 18;
+	CreateChain(x, y, collider1, size, b2_staticBody);
+
+	int collider2[20] = {
+		401, 759,
+		405, 749,
+		404, 693,
+		401, 686,
+		394, 686,
+		390, 690,
+		345, 770,
+		345, 776,
+		349, 780,
+		356, 780
+	};
+	size = 20;
+	CreateChain(x, y, collider2, size, b2_staticBody);
+
+	int collider3[20] = {
+		48, 686,
+		54, 686,
+		54, 770,
+		57, 774,
+		147, 815,
+		147, 821,
+		143, 824,
+		50, 783,
+		48, 779,
+		48, 771
+	};
+	size = 20;
+	CreateChain(x, y, collider3, size, b2_staticBody);
+
+	int collider4[20] = {
+		431, 686,
+		439, 686,
+		439, 778,
+		437, 783,
+		347, 824,
+		342, 822,
+		341, 816,
+		429, 775,
+		430, 769,
+		430, 750
+	};
+	size = 20;
+	CreateChain(x, y, collider4, size, b2_staticBody);
 
 	return true;
 }
