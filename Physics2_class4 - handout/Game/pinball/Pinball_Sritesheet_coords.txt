@@ -1,5 +1,5 @@
 // Pivot 0, 0
-int Pinball_Sritesheet[58] = {
+int Pinball_Sritesheet[62] = {
 	270, 8,
 	339, 16,
 	397, 38,
@@ -34,7 +34,7 @@ int Pinball_Sritesheet[58] = {
 };
 
 // Pivot 0.000000, 0.000000
-float Pinball_Sritesheet[58] = {
+float Pinball_Sritesheet[62] = {
 	0.263672f, 0.007813f,
 	0.331055f, 0.015625f,
 	0.387695f, 0.037109f,
