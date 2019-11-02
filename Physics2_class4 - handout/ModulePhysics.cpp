@@ -76,7 +76,7 @@ bool ModulePhysics::Start()
 	int size = 62;
 	CreateChain(x, y, pinball, size, b2_staticBody);
 	
-	CreateCircle(277, 178, 23, b2_staticBody);
+	circle = CreateCircle(277, 178, 23, b2_staticBody);
 	CreateCircle(335, 236, 23, b2_staticBody);
 
 	int triangleLeft[18] = {
