@@ -31,9 +31,12 @@ public:
 	SDL_Texture* box;
 	SDL_Texture* rick;
 	SDL_Texture* background;
+	SDL_Texture* tunel;
 	SDL_Texture* BrightRound;
 	uint bonus_fx;
 	uint hit_fx;
 	p2Point<int> ray;
 	bool ray_on;
+
+	bool tunel_visible = false;
 };
