@@ -35,11 +35,12 @@ bool ModulePhysics::Start()
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
-	// big static circle as "ground" in the middle of the screen
+	// outline collider of the pinball scene
 	int x = 1;
 	int y = 1;
-
-	int pinball[62] = {
+	
+	const int size_pinball = 62;
+	int pinball[size_pinball] = {
 		270, 8,
 		339, 16,
 		397, 38,
@@ -72,10 +73,23 @@ bool ModulePhysics::Start()
 		144, 41,
 		203, 18
 	};
+	const int size_pillShape = 16;
+	int pillShape[size_pillShape] = {
+		288, 88,
+		288, 125,
+		293, 131,
+		302, 131,
+		308, 125,
+		308, 88,
+		303, 80,
+		294, 80
+	};
 
-	int size = 62;
-
-	CreateChain(x, y, pinball, size, b2_staticBody);
+	CreateChain(x, y, pinball, size_pinball, b2_staticBody);
+	CreateChain(x-1, y-1, pillShape, size_pillShape, b2_staticBody);
+	CreateChain(x+45, y-6, pillShape, size_pillShape, b2_staticBody);
+	CreateCircle(277, 178, 23, b2_staticBody);
+	CreateCircle(335, 236, 23, b2_staticBody);
 
 	return true;
 }
@@ -99,10 +113,10 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
