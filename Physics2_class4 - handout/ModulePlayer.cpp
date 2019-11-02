@@ -47,14 +47,14 @@ bool ModulePlayer::Start()
 	def.enableLimit = true;
 	def.lowerAngle = -0.25f * b2_pi;
 	def.upperAngle = 0.15f * b2_pi;
-	def.maxMotorTorque = 60;
+	def.maxMotorTorque = 80;
 	leftJoint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&def);
 	//Joint right lever
 	def.Initialize(joint2->body, rightLeverBody->body, joint2->body->GetWorldCenter());
 	def.enableLimit = true;
 	def.lowerAngle = -0.15f * b2_pi;
 	def.upperAngle = 0.25f * b2_pi;
-	def.maxMotorTorque = 60;
+	def.maxMotorTorque = 80;
 	rightJoint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&def);
 
 	return true;

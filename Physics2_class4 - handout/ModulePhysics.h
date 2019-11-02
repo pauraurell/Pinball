@@ -4,7 +4,7 @@
 #include "Box2D/Box2D/Box2D.h"
 
 #define GRAVITY_X 0.0f
-#define GRAVITY_Y -7.0f
+#define GRAVITY_Y -10.0f
 
 #define PIXELS_PER_METER 50.0f // if touched change METER_PER_PIXEL too
 #define METER_PER_PIXEL 0.02f // this is 1 / PIXELS_PER_METER !
@@ -46,7 +46,6 @@ public:
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type);
-	//b2MouseJoint* CreateMouseJoint(b2Body* body_clicked, b2Vec2 mouse_position);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

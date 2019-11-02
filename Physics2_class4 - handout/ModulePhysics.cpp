@@ -433,24 +433,7 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2Body
 	return pbody;
 }
 
-/*b2MouseJoint* ModulePhysics::CreateMouseJoint(b2Body* body_clicked, b2Vec2 mouse_position)
-{
-	b2Vec2 mouse_position;
-	mouse_position.x = App->input->GetMouseX();
-	mouse_position.y = App->input->GetMouseY();
-	b2MouseJointDef def;
-	def.bodyA = ground;
-	def.bodyB = body_clicked;
-	def.target = mouse_position;
-	def.dampingRatio = 0.5f;
-	def.frequencyHz = 2.0f;
-	def.maxForce = 100.0f * body_clicked->GetMass();
-	mouse_joint = (b2MouseJoint*)world->CreateJoint(&def);
 
-	return mouse_joint;
-}*/
-
-// 
 update_status ModulePhysics::PostUpdate()
 {
 	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
