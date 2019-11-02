@@ -257,6 +257,33 @@ bool ModulePhysics::Start()
 	size = 50;
 	CreateChain(x, y, mapCollider3, size, b2_staticBody);
 
+	int mapCollider4[44] = {
+		483, 783,
+		484, 458,
+		479, 459,
+		476, 464,
+		476, 484,
+		476, 594,
+		475, 608,
+		467, 614,
+		453, 616,
+		445, 606,
+		444, 582,
+		445, 508,
+		438, 517,
+		429, 548,
+		428, 579,
+		428, 616,
+		446, 634,
+		461, 647,
+		468, 660,
+		470, 682,
+		470, 783,
+		477, 783
+	};
+	size = 44;
+	CreateChain(x, y, mapCollider4, size, b2_staticBody);
+
 	int Pills[16] = {
 		335, 80,
 		340, 74,
