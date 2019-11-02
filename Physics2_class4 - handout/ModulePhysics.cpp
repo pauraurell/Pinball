@@ -36,22 +36,64 @@ bool ModulePhysics::Start()
 	ground = world->CreateBody(&bd);
 
 	// big static circle as "ground" in the middle of the screen
-	int x = SCREEN_WIDTH / 2;
-	int y = SCREEN_HEIGHT / 1.5f;
-	int diameter = SCREEN_WIDTH / 2;
+	int x = SCREEN_WIDTH / 4;
+	int y = 80;
 
 	b2BodyDef body;
 	body.type = b2_staticBody;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
-	b2Body* big_ball = world->CreateBody(&body);
+	b2Body* pinball_body = world->CreateBody(&body);
 
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
+	int pinball[58] = {
+		270, 8,
+		339, 16,
+		397, 38,
+		451, 80,
+		486, 136,
+		504, 203,
+		510, 268,
+		510, 346,
+		510, 509,
+		510, 785,
+		471, 785,
+		471, 804,
+		434, 823,
+		324, 872,
+		160, 874,
+		52, 822,
+		20, 807,
+		19, 661,
+		25, 648,
+		75, 608,
+		76, 515,
+		48, 440,
+		32, 363,
+		24, 284,
+		31, 208,
+		53, 141,
+		88, 88,
+		144, 41,
+		203, 18,
+	};
+
+	int size = 58;
+
+	b2ChainShape shape;
+	b2Vec2* p = new b2Vec2[size / 2];
+
+	for (uint i = 0; i < size / 2; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(pinball[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(pinball[i * 2 + 1]);
+	}
+	
+	shape.CreateLoop(p, size / 2);
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	big_ball->CreateFixture(&fixture);
+
+	pinball_body->CreateFixture(&fixture);
 
 	return true;
 }
