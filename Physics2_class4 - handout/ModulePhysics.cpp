@@ -378,19 +378,20 @@ PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2Bo
 	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 	b2Body* b = world->CreateBody(&body);
-	b2FixtureDef fixture;
+	b2PolygonShape shape;
 	
 	b2Vec2* vertex = new b2Vec2[size / 2];
-	for (uint i = 0; i < size / 2; ++i)
+
+	for (uint i = 0; i < (size / 2); ++i)
 	{
 		vertex[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
 		vertex[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
 	}
 	
-	b2PolygonShape* shape = new b2PolygonShape();
-	shape->Set(vertex, size / 2);
+	shape.Set(vertex, size / 2);
 
-	fixture.shape = shape;
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.restitution = 0.4f;
 
