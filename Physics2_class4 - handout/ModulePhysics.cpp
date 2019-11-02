@@ -76,8 +76,8 @@ bool ModulePhysics::Start()
 	int size = 62;
 	CreateChain(x, y, pinball, size, b2_staticBody);
 	
-	circle = CreateCircle(277, 178, 23, b2_staticBody);
-	CreateCircle(335, 236, 23, b2_staticBody);
+	CreateCircle(277, 178, 23, b2_staticBody, 1.0f);
+	CreateCircle(335, 236, 23, b2_staticBody, 1.0f);
 
 	int triangleLeft[18] = {
 		93, 759,
@@ -91,7 +91,7 @@ bool ModulePhysics::Start()
 		140, 782
 	};
 	size = 18;
-	CreateChain(x, y, triangleLeft, size, b2_staticBody);
+	CreateChain(x, y, triangleLeft, size, b2_staticBody, 1.0f);
 
 	int triangleRight[20] = {
 		401, 759,
@@ -106,7 +106,7 @@ bool ModulePhysics::Start()
 		356, 780
 	};
 	size = 20;
-	CreateChain(x, y, triangleRight, size, b2_staticBody);
+	CreateChain(x, y, triangleRight, size, b2_staticBody, 1.0f);
 
 	int leftWall[20] = {
 		48, 686,
@@ -321,7 +321,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type, float restitution)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -333,8 +333,8 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type)
 	shape.m_radius = PIXEL_TO_METERS(radius);
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	fixture.density = 1.0f;
-	fixture.restitution = 0.65f;
+	fixture.density = 0.6f;
+	fixture.restitution = restitution;
 
 	b->CreateFixture(&fixture);
 
@@ -431,7 +431,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType type)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType type, float restitution)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -452,6 +452,7 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2Body
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
+	fixture.restitution = restitution;
 
 	b->CreateFixture(&fixture);
 

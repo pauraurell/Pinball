@@ -179,7 +179,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	int x, y;
 	App->audio->PlayFx(hit_fx);
 	
-	if (bodyA == App->physics->circle) { App->renderer->Blit(BrightRound, App->physics->circle->body->GetPosition().x, App->physics->circle->body->GetPosition().y, NULL); }
+	//if (bodyA == App->physics->circle) { App->renderer->Blit(BrightRound, App->physics->circle->body->GetPosition().x, App->physics->circle->body->GetPosition().y, NULL); }
 
 	/*
 	if(bodyA)

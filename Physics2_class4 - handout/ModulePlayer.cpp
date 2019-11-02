@@ -34,26 +34,35 @@ bool ModulePlayer::Start()
 			77, 39,
 			22, 7
 	};
+	int Lever2[16] = {
+		-11, 4,
+		-3, 17,
+		-7, 21,
+		-73, 45,
+		-78, 45,
+		-79, 42,
+		-77, 39,
+		-22, 7
+	};
 
 	int size = 16;
 
 	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody);
+	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody);
 	
-	//leftLeverBody = App->physics->CreateRectangle(leftLever.x+50, leftLever.y+12, 80, 15, b2_dynamicBody);
-	rightLeverBody = App->physics->CreateRectangle(leftLever.x+155, leftLever.y+12, 80, 15, b2_dynamicBody);
 	//Joint left lever
 	b2RevoluteJointDef def;
 	def.Initialize(joint1->body, leftLeverBody->body, joint1->body->GetWorldCenter());
 	def.enableLimit = true;
-	def.lowerAngle = -0.25f * b2_pi;
-	def.upperAngle = 0.15f * b2_pi;
+	def.lowerAngle = -0.35f * b2_pi;
+	def.upperAngle = 0;
 	def.maxMotorTorque = 80;
 	leftJoint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&def);
 	//Joint right lever
 	def.Initialize(joint2->body, rightLeverBody->body, joint2->body->GetWorldCenter());
 	def.enableLimit = true;
-	def.lowerAngle = -0.15f * b2_pi;
-	def.upperAngle = 0.25f * b2_pi;
+	def.lowerAngle = 0;
+	def.upperAngle = 0.35f * b2_pi;
 	def.maxMotorTorque = 80;
 	rightJoint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&def);
 
@@ -102,8 +111,6 @@ update_status ModulePlayer::Update()
 
 bool ModulePlayer::Draw()
 {
-	LOG("Drawing levers");
-
 	App->renderer->Blit(lever, leftLever.x, leftLever.y, NULL, 1.0f, leftLeverBody->GetRotation(), 10, 10);
 	App->renderer->Blit(lever, rightLever.x, rightLever.y, NULL, 1.0f, rightLeverBody->GetRotation(), 70, 10, SDL_FLIP_HORIZONTAL);
 
