@@ -261,15 +261,15 @@ bool ModulePhysics::Start()
 		335, 80,
 		340, 74,
 		349, 74,
-		354, 80,
-		354, 120,
-		350, 124,
+		353, 80,
+		353, 120,
+		349, 124,
 		339, 124,
 		335, 120
 	};
 	size = 16;
 	CreateChain(x - 1, y, Pills, size, b2_staticBody);
-	CreateChain(x - 48, y + 5, Pills, size, b2_staticBody);
+	CreateChain(x - 46, y + 5, Pills, size, b2_staticBody);
 
 	return true;
 }
