@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "p2Point.h"
 #include "ModuleTextures.h"
+#include "Box2D/Box2D/Box2D.h"
 
 
 class ModulePlayer : public Module
@@ -22,7 +23,10 @@ public:
 	SDL_Texture* lever;
 	iPoint leftLever;
 	iPoint rightLever;
-	float leftRotation;
-	float rightRotation;
+
+	PhysBody* joint1;
+	PhysBody* joint2;
+	PhysBody* leftLeverBody;
+	PhysBody* rightLeverBody;
 
 };
