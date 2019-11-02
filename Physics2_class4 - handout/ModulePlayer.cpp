@@ -35,7 +35,9 @@ bool ModulePlayer::Start()
 			22, 7
 	};
 
-	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, 16, b2_dynamicBody);
+	int size = 16;
+
+	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody);
 	
 	//leftLeverBody = App->physics->CreateRectangle(leftLever.x+50, leftLever.y+12, 80, 15, b2_dynamicBody);
 	rightLeverBody = App->physics->CreateRectangle(leftLever.x+155, leftLever.y+12, 80, 15, b2_dynamicBody);
