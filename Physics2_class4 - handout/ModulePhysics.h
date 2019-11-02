@@ -50,6 +50,7 @@ public:
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
+	PhysBody *circle;
 
 private:
 

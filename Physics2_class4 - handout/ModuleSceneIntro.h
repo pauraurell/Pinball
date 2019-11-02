@@ -22,6 +22,8 @@ public:
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 
+	PhysBody* kicker;
+
 	PhysBody* sensor;
 	bool sensed;
 
@@ -29,6 +31,7 @@ public:
 	SDL_Texture* box;
 	SDL_Texture* rick;
 	SDL_Texture* background;
+	SDL_Texture* BrightRound;
 	uint bonus_fx;
 	uint hit_fx;
 	p2Point<int> ray;
