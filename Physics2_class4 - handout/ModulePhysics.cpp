@@ -76,8 +76,9 @@ bool ModulePhysics::Start()
 	int size = 62;
 	CreateChain(x, y, pinball, size, b2_staticBody);
 	
-	CreateCircle(277, 178, 23, b2_staticBody, 1.0f);
-	CreateCircle(335, 236, 23, b2_staticBody, 1.0f);
+	CreateCircle(277, 178, 23, b2_staticBody, 1.3f);
+	CreateCircle(335, 236, 23, b2_staticBody, 1.3f);
+	CreateCircle(386, 174, 23, b2_staticBody, 1.3f);
 
 	int triangleLeft[18] = {
 		93, 759,
@@ -139,57 +140,57 @@ bool ModulePhysics::Start()
 	CreateChain(x, y, rightWall, size, b2_staticBody);
 
 	int mapCollider1[102] = {
-	71, 390,
-	60, 336,
-	53, 285,
-	56, 220,
-	75, 162,
-	108, 112,
-	141, 83,
-	185, 55,
-	223, 44,
-	246, 63,
-	259, 80,
-	259, 112,
-	260, 124,
-	275, 153,
-	277, 243,
-	274, 252,
-	269, 253,
-	183, 318,
-	181, 324,
-	176, 326,
-	172, 323,
-	172, 318,
-	158, 295,
-	152, 273,
-	154, 259,
-	160, 246,
-	170, 238,
-	172, 230,
-	171, 219,
-	165, 212,
-	153, 209,
-	139, 217,
-	128, 230,
-	120, 251,
-	118, 277,
-	121, 293,
-	129, 317,
-	135, 330,
-	142, 338,
-	143, 345,
-	143, 352,
-	137, 354,
-	130, 346,
-	121, 329,
-	108, 303,
-	63, 319,
-	68, 344,
-	78, 385,
-	79, 401,
-	75, 402,
-	71, 398
+		71, 390,
+		60, 336,
+		53, 285,
+		56, 220,
+		75, 162,
+		108, 112,
+		141, 83,
+		185, 55,
+		223, 44,
+		246, 63,
+		259, 80,
+		259, 112,
+		260, 124,
+		275, 153,
+		277, 243,
+		274, 252,
+		269, 253,
+		183, 318,
+		181, 324,
+		176, 326,
+		172, 323,
+		172, 318,
+		158, 295,
+		152, 273,
+		154, 259,
+		160, 246,
+		170, 238,
+		172, 230,
+		171, 219,
+		165, 212,
+		153, 209,
+		139, 217,
+		128, 230,
+		120, 251,
+		118, 277,
+		121, 293,
+		129, 317,
+		135, 330,
+		142, 338,
+		143, 345,
+		143, 352,
+		137, 354,
+		130, 346,
+		121, 329,
+		108, 303,
+		63, 319,
+		68, 344,
+		78, 385,
+		79, 401,
+		75, 402,
+		71, 398
 	};
 	size = 102;
 	CreateChain(x, y, mapCollider1, size, b2_staticBody);
@@ -220,8 +221,8 @@ bool ModulePhysics::Start()
 		423, 298,
 		391, 253,
 		357, 229,
-		328, 211,
-		324, 213,
+		334, 216,
+		322, 221,
 		316, 251,
 		307, 292
 	};
@@ -372,7 +373,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2BodyType type)
+PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2BodyType type, float restitution)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -393,7 +394,7 @@ PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2Bo
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
-	fixture.restitution = 0.4f;
+	fixture.restitution = restitution;
 
 	b->CreateFixture(&fixture);
 

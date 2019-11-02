@@ -47,8 +47,8 @@ bool ModulePlayer::Start()
 
 	int size = 16;
 
-	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody);
-	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody);
+	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody, 1.0f);
+	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody, 1.0f);
 	
 	//Joint left lever
 	b2RevoluteJointDef def;
@@ -56,14 +56,14 @@ bool ModulePlayer::Start()
 	def.enableLimit = true;
 	def.lowerAngle = -0.35f * b2_pi;
 	def.upperAngle = 0;
-	def.maxMotorTorque = 80;
+	def.maxMotorTorque = 150;
 	leftJoint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&def);
 	//Joint right lever
 	def.Initialize(joint2->body, rightLeverBody->body, joint2->body->GetWorldCenter());
 	def.enableLimit = true;
 	def.lowerAngle = 0;
 	def.upperAngle = 0.35f * b2_pi;
-	def.maxMotorTorque = 80;
+	def.maxMotorTorque =150;
 	rightJoint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&def);
 
 	return true;
