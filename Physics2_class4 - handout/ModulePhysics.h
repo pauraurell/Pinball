@@ -43,15 +43,18 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, float restitution = 0.0f);
+	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, float restitution = 0.0f, int list = 1);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type);
-	PhysBody* CreatePolygon(int x, int y, int* points, int size, b2BodyType type, float restitution = 0.0f);
+	PhysBody* CreatePolygon(int x, int y, int* points, int size, b2BodyType type, float restitution = 0.0f, int list = 1);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
-	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type, float restitution = 0.0f);
+	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type, float restitution = 0.0f, int list = 1);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 	p2List<PhysBody*> bouncyness;
+	p2List<PhysBody*> walls;
+	p2List<PhysBody*> triangles;
+	p2List<PhysBody*> circles;
 
 	b2World* world;
 

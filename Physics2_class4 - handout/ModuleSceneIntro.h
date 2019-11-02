@@ -33,6 +33,7 @@ public:
 	SDL_Texture* background;
 	SDL_Texture* tunel;
 	SDL_Texture* BrightRound;
+	SDL_Texture* BrightTriangular;
 	uint bonus_fx;
 	uint hit_fx;
 	p2Point<int> ray;

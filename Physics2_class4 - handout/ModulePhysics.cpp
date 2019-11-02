@@ -76,9 +76,9 @@ bool ModulePhysics::Start()
 	int size = 62;
 	CreateChain(x, y, pinball, size, b2_staticBody);
 	
-	CreateCircle(277, 178, 23, b2_staticBody, 1.3f);
-	CreateCircle(335, 236, 23, b2_staticBody, 1.3f);
-	CreateCircle(386, 174, 23, b2_staticBody, 1.3f);
+	CreateCircle(277, 178, 23, b2_staticBody, 1.3f, 3);
+	CreateCircle(335, 236, 23, b2_staticBody, 1.3f, 3);
+	CreateCircle(386, 174, 23, b2_staticBody, 1.3f, 3);
 
 	int triangleLeft[18] = {
 		93, 759,
@@ -92,7 +92,7 @@ bool ModulePhysics::Start()
 		140, 782
 	};
 	size = 18;
-	CreateChain(x, y, triangleLeft, size, b2_staticBody, 1.0f);
+	CreateChain(x, y, triangleLeft, size, b2_staticBody, 1.0f, 2);
 
 	int triangleRight[20] = {
 		401, 759,
@@ -107,7 +107,7 @@ bool ModulePhysics::Start()
 		356, 780
 	};
 	size = 20;
-	CreateChain(x, y, triangleRight, size, b2_staticBody, 1.0f);
+	CreateChain(x, y, triangleRight, size, b2_staticBody, 1.0f, 2);
 
 	int leftWall[20] = {
 		48, 686,
@@ -322,7 +322,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type, float restitution)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type, float restitution, int list)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -343,6 +343,10 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type,
 	pbody->body = b;
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = radius;
+
+	if (list = 1) { walls.add(pbody); }
+	if (list = 2) { triangles.add(pbody); }
+	if (list = 3) { circles.add(pbody); }
 
 	return pbody;
 }
@@ -373,7 +377,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2BodyType type, float restitution)
+PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2BodyType type, float restitution, int list)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -401,6 +405,10 @@ PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2Bo
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
 	b->SetUserData(pbody);
+
+	if (list = 1) { walls.add(pbody); }
+	if (list = 2) { triangles.add(pbody); }
+	if (list = 3) { circles.add(pbody); }
 
 	return pbody;
 }
@@ -432,7 +440,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType type, float restitution)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType type, float restitution, int list)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -463,6 +471,10 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2Body
 	pbody->body = b;
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = 0;
+
+	if (list = 1) { walls.add(pbody); }
+	if (list = 2) { triangles.add(pbody); }
+	if (list = 3) { circles.add(pbody); }
 
 	return pbody;
 }

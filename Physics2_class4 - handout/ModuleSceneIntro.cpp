@@ -33,6 +33,7 @@ bool ModuleSceneIntro::Start()
 	background = App->textures->Load("pinball/Pinball_Sritesheet.png");
 	tunel = App->textures->Load("pinball/Pinball_Tunel.png");
 	BrightRound = App->textures->Load("pinball/Round_coll.png");
+	BrightTriangular = App->textures->Load("pinball/Bright_Triangular_collider.png");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
@@ -191,8 +192,36 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
 	App->audio->PlayFx(hit_fx);
+	bool collided = false;
+
+	p2List_item<PhysBody*>* c = circles.getFirst();
+	p2List_item<PhysBody*>* t = App->physics->triangles.getFirst();
+	p2List_item<PhysBody*>* c2 = App->physics->circles.getFirst();
+
+	while (c != NULL)
+	{
+		while (t != NULL && collided == false)
+		{
+			if (bodyA == c->data && bodyB == t->data)
+			{
+				App->renderer->Blit(BrightTriangular, t->data->body->GetPosition().x, t->data->body->GetPosition().y, NULL, 1.0f);
+				collided = true;
+			}
+			t = t->next;
+		}
+		while (c2 != NULL && collided == false)
+		{
+			if (bodyA == c->data && bodyB == t->data)
+			{
+				App->renderer->Blit(BrightRound, c2->data->body->GetPosition().x, c2->data->body->GetPosition().y, NULL, 1.0f);
+				collided = true;
+			}
+			c2 = c2->next;
+		}
+		collided = false;
+		c = c->next;
+	}
 	
 	//if (bodyA == App->physics->circle) { App->renderer->Blit(BrightRound, App->physics->circle->body->GetPosition().x, App->physics->circle->body->GetPosition().y, NULL); }
 
