@@ -36,8 +36,8 @@ bool ModulePhysics::Start()
 	ground = world->CreateBody(&bd);
 
 	// big static circle as "ground" in the middle of the screen
-	int x = SCREEN_WIDTH / 4;
-	int y = 80;
+	int x = 1;
+	int y = 1;
 
 	b2BodyDef body;
 	body.type = b2_staticBody;
