@@ -31,6 +31,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	hit_fx = App->audio->LoadFx("pinball/hit.ogg");
 	background = App->textures->Load("pinball/Pinball_Sritesheet.png");
+	tunel = App->textures->Load("pinball/Pinball_Tunel.png");
 	BrightRound = App->textures->Load("pinball/Round_coll.png");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
@@ -49,7 +50,14 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	App->renderer->Blit(background, 0, 0, NULL);
+	
+	 App->renderer->Blit(background, 0, 0, NULL);
+
+	if (tunel_visible == true)
+	{
+		App->renderer->Blit(tunel, 0, 0, NULL);
+	}
+
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -67,6 +75,13 @@ update_status ModuleSceneIntro::Update()
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50, b2_dynamicBody));
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		
+	 	if (tunel_visible == false){tunel_visible = true;}
+		else if (tunel_visible == true) { tunel_visible = false; }
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
