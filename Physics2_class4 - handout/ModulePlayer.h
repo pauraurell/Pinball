@@ -15,4 +15,6 @@ public:
 
 public:
 
+	SDL_Texture* lever;
+
 };
