@@ -44,6 +44,7 @@ public:
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type);
+	PhysBody* CreatePolygon(int x, int y, int* points, int size, b2BodyType type);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type);
 	//b2MouseJoint* CreateMouseJoint(b2Body* body_clicked, b2Vec2 mouse_position);
