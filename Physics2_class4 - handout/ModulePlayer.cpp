@@ -64,8 +64,8 @@ bool ModulePlayer::Draw()
 {
 	LOG("Drawing levers");
 
-	App->renderer->Blit(lever, leftLever.x, leftLever.y, NULL, 1.0f);
-	App->renderer->Blit(lever, rightLever.x, rightLever.y, NULL, 1.0f, 0, INT_MAX, INT_MAX, SDL_FLIP_HORIZONTAL);
+	App->renderer->Blit(lever, leftLever.x, leftLever.y, NULL, 1.0f, leftLeverBody->GetRotation()-24.0f, 10, 10);
+	App->renderer->Blit(lever, rightLever.x, rightLever.y, NULL, 1.0f, rightLeverBody->GetRotation()+24.0f, 70, 10, SDL_FLIP_HORIZONTAL);
 
 	return true;
 }
