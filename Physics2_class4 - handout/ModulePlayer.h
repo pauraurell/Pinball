@@ -29,5 +29,6 @@ public:
 	PhysBody* leftLeverBody;
 	PhysBody* rightLeverBody;
 	b2RevoluteJoint* leftJoint;
+	b2RevoluteJoint* rightJoint;
 
 };
