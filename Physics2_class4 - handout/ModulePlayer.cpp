@@ -23,7 +23,7 @@ bool ModulePlayer::Start()
 	rightLever = { 267, 817};
 	joint1 = App->physics->CreateCircle(leftLever.x+11, leftLever.y+12, 5, b2_staticBody);
 	joint2 = App->physics->CreateCircle(rightLever.x+69, rightLever.y+12, 5, b2_staticBody);
-	/*
+	
 	int Lever[20] = {
 	8, 3,
 	15, 3,
@@ -37,9 +37,9 @@ bool ModulePlayer::Start()
 	3, 8
 	};
 
-	leftLeverBody = App->physics->CreateChain(leftLever.x, leftLever.y, Lever, 20, b2_dynamicBody);
-	*/
-	leftLeverBody = App->physics->CreateRectangle(leftLever.x+50, leftLever.y+12, 80, 15, b2_dynamicBody);
+	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, 20, b2_dynamicBody);
+	
+	//leftLeverBody = App->physics->CreateRectangle(leftLever.x+50, leftLever.y+12, 80, 15, b2_dynamicBody);
 	rightLeverBody = App->physics->CreateRectangle(leftLever.x+155, leftLever.y+12, 80, 15, b2_dynamicBody);
 	//Joint left lever
 	b2RevoluteJointDef def;
