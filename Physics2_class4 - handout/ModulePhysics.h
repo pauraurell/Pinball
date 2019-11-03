@@ -60,6 +60,7 @@ public:
 	void NoGravity(b2Body *body);
 
 	b2World* world;
+	PhysBody* tunelCol = nullptr;
 
 private:
 

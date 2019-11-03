@@ -40,46 +40,46 @@ bool ModulePhysics::Start()
 	int y = 1;
 	
 	int pinball[64] = {
-		270, 8,
-		339, 16,
-		397, 38,
-		451, 80,
-		486, 136,
-		504, 203,
-		510, 268,
-		510, 346,
-		510, 509,
-		510, 785,
-		471, 785,
-		471, 804,
-		434, 823,
-		327, 875,
-		327, 927,
-		160, 927,
-		160, 874,
-		52, 822,
-		20, 807,
-		19, 661,
-		25, 648,
-		75, 608,
-		80, 511,
-		63, 492,
-		39, 414,
-		26, 335,
-		23, 247,
-		38, 177,
-		69, 112,
-		110, 64,
-		156, 31,
-		215, 10
+			270, 8,
+			339, 16,
+			397, 38,
+			451, 80,
+			486, 136,
+			504, 203,
+			510, 268,
+			510, 346,
+			510, 509,
+			510, 785,
+			471, 785,
+			471, 804,
+			434, 823,
+			327, 875,
+			327, 927,
+			160, 927,
+			160, 874,
+			52, 822,
+			20, 807,
+			19, 661,
+			25, 648,
+			75, 608,
+			80, 511,
+			63, 492,
+			39, 414,
+			26, 335,
+			23, 247,
+			38, 177,
+			69, 112,
+			110, 64,
+			156, 31,
+			215, 10
 	};
 
 	int size = 64;
 	CreateChain(x, y, pinball, size, b2_staticBody);
-	
-	CreateCircle(277, 178, 23, b2_staticBody, 1.3f, 3);
-	CreateCircle(335, 236, 23, b2_staticBody, 1.3f, 3);
-	CreateCircle(386, 174, 23, b2_staticBody, 1.3f, 3);
+
+	circles.add(CreateCircle(277, 178, 23, b2_staticBody, 1.3f));
+	circles.add(CreateCircle(335, 236, 23, b2_staticBody, 1.3f));
+	circles.add(CreateCircle(386, 174, 23, b2_staticBody, 1.3f));
 
 	int triangleLeft[18] = {
 		93, 759,
@@ -93,7 +93,7 @@ bool ModulePhysics::Start()
 		140, 782
 	};
 	size = 18;
-	triangles.add(CreateChain(x, y, triangleLeft, size, b2_staticBody, 1.1f, 2));
+	triangles.add(CreateChain(x, y, triangleLeft, size, b2_staticBody, 1.1f));
 
 	int triangleRight[20] = {
 		401, 759,
@@ -108,7 +108,7 @@ bool ModulePhysics::Start()
 		356, 780
 	};
 	size = 20;
-	triangles.add(CreateChain(x, y, triangleRight, size, b2_staticBody, 1.1f, 2));
+	triangles.add(CreateChain(x, y, triangleRight, size, b2_staticBody, 1.1f));
 
 	int leftWall[20] = {
 		48, 686,
@@ -123,7 +123,7 @@ bool ModulePhysics::Start()
 		48, 771
 	};
 	size = 20;
-	CreateChain(x, y, leftWall, size, b2_staticBody);
+	walls.add(CreateChain(x, y, leftWall, size, b2_staticBody));
 
 	int rightWall[20] = {
 		431, 686,
@@ -138,7 +138,7 @@ bool ModulePhysics::Start()
 		430, 750
 	};
 	size = 20;
-	CreateChain(x, y, rightWall, size, b2_staticBody);
+	walls.add(CreateChain(x, y, rightWall, size, b2_staticBody));
 
 	int mapCollider1[102] = {
 		71, 390,
@@ -194,7 +194,7 @@ bool ModulePhysics::Start()
 		71, 398
 	};
 	size = 102;
-	CreateChain(x, y, mapCollider1, size, b2_staticBody);
+	walls.add(CreateChain(x, y, mapCollider1, size, b2_staticBody));
 
 	int mapCollider2[58] = {
 		297, 336,
@@ -228,7 +228,7 @@ bool ModulePhysics::Start()
 		307, 292
 	};
 	size = 58;
-	CreateChain(x, y, mapCollider2, size, b2_staticBody);
+	walls.add(CreateChain(x, y, mapCollider2, size, b2_staticBody));
 
 	int mapCollider3[50] = {
 		464, 305,
@@ -258,7 +258,7 @@ bool ModulePhysics::Start()
 		463, 307
 	};
 	size = 50;
-	CreateChain(x, y, mapCollider3, size, b2_staticBody);
+	walls.add(CreateChain(x, y, mapCollider3, size, b2_staticBody));
 
 	int mapCollider4[44] = {
 		483, 783,
@@ -285,7 +285,7 @@ bool ModulePhysics::Start()
 		477, 783
 	};
 	size = 44;
-	CreateChain(x, y, mapCollider4, size, b2_staticBody);
+	walls.add(CreateChain(x, y, mapCollider4, size, b2_staticBody));
 
 	int Pills[16] = {
 		335, 80,
@@ -298,8 +298,8 @@ bool ModulePhysics::Start()
 		335, 120
 	};
 	size = 16;
-	CreateChain(x - 1, y, Pills, size, b2_staticBody);
-	CreateChain(x - 46, y + 5, Pills, size, b2_staticBody);
+	walls.add(CreateChain(x - 1, y, Pills, size, b2_staticBody));
+	walls.add(CreateChain(x - 46, y + 5, Pills, size, b2_staticBody));
 
 	int Pinball_Tunel[102] = {
 	71, 397,
@@ -355,7 +355,7 @@ bool ModulePhysics::Start()
 	71, 396
 	};
 	size = 102;
-	CreateChain(x, y, Pinball_Tunel, size, b2_staticBody);
+	tunelCol = CreateChain(x, y, Pinball_Tunel, size, b2_staticBody);
 
 	return true;
 }
