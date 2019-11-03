@@ -351,7 +351,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type,
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2BodyType type)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2BodyType type, float density)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -363,7 +363,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2
 
 	b2FixtureDef fixture;
 	fixture.shape = &box;
-	fixture.density = 1.0f;
+	fixture.density = density;
 	fixture.restitution = 0.4f;
 
 	b->CreateFixture(&fixture);

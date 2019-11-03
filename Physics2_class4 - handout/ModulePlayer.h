@@ -26,14 +26,16 @@ public:
 
 	iPoint leftLever;
 	iPoint rightLever;
-	iPoint kickerPos;
+	b2Vec2 kickerPos;
 
 	PhysBody* joint1;
 	PhysBody* joint2;
+	PhysBody* joint3;
 	PhysBody* leftLeverBody;
 	PhysBody* rightLeverBody;
 	b2RevoluteJoint* leftJoint;
 	b2RevoluteJoint* rightJoint;
+	b2PrismaticJoint* kickerJoint;
 
 	PhysBody* kickerBody;
 
