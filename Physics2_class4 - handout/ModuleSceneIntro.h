@@ -28,9 +28,10 @@ public:
 	PhysBody* sensor;
 	PhysBody* sensor2;
 	PhysBody* sensor3;
-	PhysBody* sensor_cahngeSprite;
-	PhysBody* sensor_cahngeSprite_out;
+	PhysBody* sensor_changeSprite;
+	PhysBody* sensor_changeSprite_out;
 	bool sensed;
+	bool kickerActive = false;
 
 	int blitTriangles = 0;
 	int blitCircles = 0;

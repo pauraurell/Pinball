@@ -54,7 +54,9 @@ bool ModulePlayer::Start()
 
 	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody, 1.0f, 10.0f);
 	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody, 1.0f, 10.0f);
-	kickerBody = App->physics->CreateRectangle(kickerPos.x, kickerPos.y, 25, 5, b2_dynamicBody, 0);
+	//kickerBody = App->physics->CreateRectangle(kickerPos.x, kickerPos.y, 25, 5, b2_dynamicBody, 0);
+	kickerSensor = App->physics->CreateRectangleSensor(kickerPos.x + 8, kickerPos.y - 7, 25, 25);
+	kickerSensorDeactivator = App->physics->CreateRectangleSensor(kickerPos.x + 8, kickerPos.y - 200, 25, 5);
 	
 	//Joint left lever
 	b2RevoluteJointDef def;
@@ -74,17 +76,17 @@ bool ModulePlayer::Start()
 
 	b2PrismaticJointDef def2;
 	//def2.Initialize(kickerJoint->body, kickerBody->body, kickerJoint->body->GetWorldCenter(), { 0, 1 });
-	def2.bodyA = joint3->body;
+	/*def2.bodyA = joint3->body;
 	def2.bodyB = kickerBody->body;
 	def2.localAnchorA = joint3->body->GetWorldCenter();
 	def2.localAnchorB = kickerBody->body->GetWorldCenter();
 	def2.localAxisA = { 0, 1 };
 	def2.collideConnected = false;
-	/*def2.enableLimit = true;
+	def2.enableLimit = true;
 	def2.lowerTranslation = PIXEL_TO_METERS(499);
-	def2.upperTranslation = PIXEL_TO_METERS(471);*/
+	def2.upperTranslation = PIXEL_TO_METERS(471);
 	//def2.maxMotorForce = 150;
-	kickerJoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&def2);
+	kickerJoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&def2);*/
 
 	return true;
 }
@@ -146,9 +148,12 @@ update_status ModulePlayer::Update()
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
 		if (App->scene_intro->circles.getFirst() != NULL)
 		{
-			//kickerBody->body->ApplyLinearImpulse({ 0, 60 }, kickerBody->body->GetWorldCenter(), true);
-			App->scene_intro->circles.getFirst()->data->body->ApplyLinearImpulse({ 0, kickerCounter / 8 }, App->scene_intro->circles.getFirst()->data->body->GetWorldCenter(), true);
-			kickerCounter = 0;
+			if (App->scene_intro->kickerActive == true)
+			{
+				//kickerBody->body->ApplyLinearImpulse({ 0, 60 }, kickerBody->body->GetWorldCenter(), true);
+				App->scene_intro->circles.getFirst()->data->body->ApplyLinearImpulse({ 0, kickerCounter / 8 }, App->scene_intro->circles.getFirst()->data->body->GetWorldCenter(), true);
+				kickerCounter = 0;
+			}
 		}
 	}
 

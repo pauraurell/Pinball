@@ -39,5 +39,7 @@ public:
 	b2PrismaticJoint* kickerJoint;
 
 	PhysBody* kickerBody;
+	PhysBody* kickerSensor;
+	PhysBody* kickerSensorDeactivator;
 
 };
