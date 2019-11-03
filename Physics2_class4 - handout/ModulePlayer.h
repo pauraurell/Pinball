@@ -21,8 +21,12 @@ public:
 public:
 
 	SDL_Texture* lever;
+	SDL_Texture* kicker;
+	SDL_Texture* kickerBackground;
+
 	iPoint leftLever;
 	iPoint rightLever;
+	iPoint kickerPos;
 
 	PhysBody* joint1;
 	PhysBody* joint2;
@@ -30,5 +34,7 @@ public:
 	PhysBody* rightLeverBody;
 	b2RevoluteJoint* leftJoint;
 	b2RevoluteJoint* rightJoint;
+
+	PhysBody* kickerBody;
 
 };

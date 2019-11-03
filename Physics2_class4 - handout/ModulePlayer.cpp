@@ -19,8 +19,11 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	lever = App->textures->Load("pinball/Lever.png");
+	kickerBackground = App->textures->Load("pinball/kicker_sprite.png");
+	kicker = App->textures->Load("pinball/kicker.png");
 	leftLever = { 142, 817};
 	rightLever = { 267, 817};
+	kickerPos = { 490, 780 };
 	joint1 = App->physics->CreateCircle(leftLever.x+11, leftLever.y+12, 5, b2_staticBody);
 	joint2 = App->physics->CreateCircle(rightLever.x+69, rightLever.y+12, 5, b2_staticBody);
 	
@@ -49,6 +52,7 @@ bool ModulePlayer::Start()
 
 	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody, 1.0f);
 	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody, 1.0f);
+	kickerBody = App->physics->CreateRectangle(kickerPos.x, kickerPos.y, 15, 40, b2_staticBody);
 	
 	//Joint left lever
 	b2RevoluteJointDef def;
@@ -100,6 +104,14 @@ update_status ModulePlayer::Update()
 		rightJoint->EnableMotor(false);
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
+		kickerPos.y++;
+	}
+
+	else  {
+		kickerPos.y = 780;
+	}
+
 
 	if (Draw()) {
 		ret = UPDATE_CONTINUE;
@@ -113,6 +125,8 @@ bool ModulePlayer::Draw()
 {
 	App->renderer->Blit(lever, leftLever.x, leftLever.y, NULL, 1.0f, leftLeverBody->GetRotation(), 10, 10);
 	App->renderer->Blit(lever, rightLever.x, rightLever.y, NULL, 1.0f, rightLeverBody->GetRotation(), 70, 10, SDL_FLIP_HORIZONTAL);
+	App->renderer->Blit(kicker, kickerPos.x, kickerPos.y, NULL, 1.0f, kickerBody->GetRotation(), 10, 10);
+	App->renderer->Blit(kickerBackground,475, 780, NULL);
 
 	return true;
 }
