@@ -56,10 +56,13 @@ bool ModuleSceneIntro::Start()
 
 	int size = 8;
 	door = App->physics->CreateChain(1, 1, Pinball_door, size, b2_staticBody);
+	sensordoor1 = App->physics->CreateRectangleSensor(160, 50, 8, 20);
+	door1 = App->physics->CreateRectangle(230, 30, 4, 20, b2_staticBody);
 
 	initialPos = new b2Vec2(10, 15);
 	outPos = new b2Vec2(300, 0);
 	teleportPos = new b2Vec2(1.5f, 12.5f);
+	doorPos = new b2Vec2(PIXEL_TO_METERS(230), PIXEL_TO_METERS(30));
 
 	tunel1force = new b2Vec2(-70, -90);
 	tunel2force = new b2Vec2(30, -100);
@@ -238,6 +241,16 @@ update_status ModuleSceneIntro::Update()
 			doorOpen -= 0.01f;
 		}
 	}
+	if (sensordoor1timer > 1) {
+		door1->body->SetTransform(*outPos, 0);
+		if (sensordoor1timer <= 1.5f) {
+			door1->body->SetTransform(*doorPos, 0);
+			sensordoor1timer = 0;
+		}
+		else {
+			sensordoor1timer -= 0.01f;
+		}
+	}
 
 	if (sensorStop > 1) {
 		if (sensorStop <= 1.5f) {
@@ -384,6 +397,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				else if (s->data == sensor2) {
 					points += teleporterPoints;
 					tele = true;
+				}
+				else if (s->data == sensordoor1) {
+					points += teleporterPoints;
+					sensordoor1timer = 2.0f;
 				}
 				else if (s->data == sensor && kickerActive == false) {
 					App->audio->PlayFx(notCool_fx);

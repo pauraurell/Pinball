@@ -26,6 +26,11 @@ public:
 	PhysBody* kicker;
 
 	PhysBody* door;
+	PhysBody* sensordoor1;
+	PhysBody* door1;
+	float sensordoor1timer;
+	b2Vec2* doorPos;
+
 	int Pinball_door[8] = {
 		477, 452,
 		500, 423,
