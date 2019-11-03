@@ -37,7 +37,7 @@ bool ModuleSceneIntro::Start()
 	BrightRound = App->textures->Load("pinball/Round_coll.png");
 	BrightTriangular = App->textures->Load("pinball/Bright_Triangular_collider.png");
 
-	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
 	//sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
 	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
 	sensor_changeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
@@ -93,10 +93,12 @@ update_status ModuleSceneIntro::Update()
 		else if (tunel_visible == true) { tunel_visible = false; }
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
+	if (resetPos || App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
 		if (circles.getFirst() != NULL)
 		{
+			circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
 			circles.getFirst()->data->body->SetTransform(*initialPos, 0);
+			resetPos = false;
 		}
 	}
 
@@ -312,10 +314,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				else kickerActive = false;
 				collided = true;
 
-				if (s->data == sensor3) 
+				if (s->data == sensor3 && sensorStop == 0) 
 				{
 					App->physics->NoGravity(c->data->body);
 					sensorStop = 3;
+				}
+				else if (s->data == sensor && kickerActive == false) {
+					resetPos = true;
 				}
 			}
 			s = s->next;

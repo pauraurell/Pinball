@@ -39,7 +39,7 @@ bool ModulePhysics::Start()
 	int x = 1;
 	int y = 1;
 	
-	int pinball[62] = {
+	int pinball[64] = {
 		270, 8,
 		339, 16,
 		397, 38,
@@ -62,18 +62,19 @@ bool ModulePhysics::Start()
 		19, 661,
 		25, 648,
 		75, 608,
-		76, 515,
-		48, 440,
-		32, 363,
-		24, 284,
-		31, 208,
-		53, 141,
-		88, 88,
-		144, 41,
-		203, 18
+		78, 510,
+		63, 492,
+		40, 414,
+		26, 335,
+		23, 247,
+		39, 179,
+		71, 116,
+		111, 67,
+		156, 33,
+		215, 13
 	};
 
-	int size = 62;
+	int size = 64;
 	CreateChain(x, y, pinball, size, b2_staticBody);
 	
 	CreateCircle(277, 178, 23, b2_staticBody, 1.3f, 3);
@@ -92,7 +93,7 @@ bool ModulePhysics::Start()
 		140, 782
 	};
 	size = 18;
-	triangles.add(CreateChain(x, y, triangleLeft, size, b2_staticBody, 1.0f, 2));
+	triangles.add(CreateChain(x, y, triangleLeft, size, b2_staticBody, 1.1f, 2));
 
 	int triangleRight[20] = {
 		401, 759,
@@ -107,7 +108,7 @@ bool ModulePhysics::Start()
 		356, 780
 	};
 	size = 20;
-	triangles.add(CreateChain(x, y, triangleRight, size, b2_staticBody, 1.0f, 2));
+	triangles.add(CreateChain(x, y, triangleRight, size, b2_staticBody, 1.1f, 2));
 
 	int leftWall[20] = {
 		48, 686,
