@@ -38,7 +38,7 @@ bool ModuleSceneIntro::Start()
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 	//sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
-	//sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
+	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
 	sensor_cahngeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
 	sensor_cahngeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
 
@@ -295,9 +295,14 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			if (bodyA == c->data && bodyB == s->data)
 			{
 				blitTemp = 1.0f;
-				if (s->data->body->GetTransform().p.x < 4) tunel_visible = true;
+				if (s->data == sensor_cahngeSprite) tunel_visible = true;
 				if (s->data == sensor_cahngeSprite_out) tunel_visible = false;
 				collided = true;
+
+				if (s->data == sensor3) 
+				{
+					App->physics->NoGravity(c->data->body);
+				}
 			}
 			s = s->next;
 		}

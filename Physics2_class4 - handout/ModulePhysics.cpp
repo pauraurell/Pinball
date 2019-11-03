@@ -694,3 +694,8 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 	if(physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
 }
+
+void ModulePhysics::NoGravity(b2Body* body)
+{
+	body->SetGravityScale(0.0f);
+}
