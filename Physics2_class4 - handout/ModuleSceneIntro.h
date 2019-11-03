@@ -38,6 +38,8 @@ public:
 	PhysBody* sensor3;
 	PhysBody* sensor_changeSprite;
 	PhysBody* sensor_changeSprite_out;
+	PhysBody* sensor_changeSprite2;
+	PhysBody* sensor_changeSprite2_out;
 	bool sensed;
 	bool kickerActive = false;
 	bool resetPos = false;
@@ -69,4 +71,5 @@ public:
 	bool ray_on;
 
 	bool tunel_visible = false;
+	bool tunel_2_enabled = false;
 };

@@ -61,6 +61,8 @@ public:
 
 	b2World* world;
 	PhysBody* tunelCol = nullptr;
+	PhysBody* tunel2Col = nullptr;
+	PhysBody*tunel2Col_interior = nullptr;
 
 private:
 
