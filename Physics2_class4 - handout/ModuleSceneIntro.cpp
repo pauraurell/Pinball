@@ -232,7 +232,7 @@ update_status ModuleSceneIntro::Update()
 			blitCircles = 0;
 		}
 		else {
-			App->renderer->Blit(BrightRound, 361, 150, NULL, 1.0f);
+			App->renderer->Blit(BrightRound, 361, 148, NULL, 1.0f);
 			blitTemp -= 0.1f;
 		}
 	}
