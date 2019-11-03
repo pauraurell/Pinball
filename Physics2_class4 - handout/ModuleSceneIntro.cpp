@@ -31,6 +31,7 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	hit_fx = App->audio->LoadFx("pinball/hit.ogg");
+	hit_circle_fx = App->audio->LoadFx("pinball/Track2.wav");
 	background = App->textures->Load("pinball/Pinball_Sritesheet.png");
 	backgroundUpBall = App->textures->Load("pinball/ElementsUpTheBall.png");
 	tunel = App->textures->Load("pinball/Pinball_Tunel.png");
@@ -62,7 +63,6 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	
 	 App->renderer->Blit(background, 0, 0, NULL);
 
 	if (tunel_visible == true)
@@ -278,7 +278,7 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	App->audio->PlayFx(hit_fx);
+	
 	bool collided = false;
 	
 	p2List_item<PhysBody*>* c = circles.getFirst();
@@ -296,6 +296,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			if (bodyA == c->data && bodyB == t->data)
 			{
+				App->audio->PlayFx(hit_fx);
 				blitTemp = 1.0f;
 				if (c->data->body->GetTransform().p.x < 4) blitTriangles = 1;
 				else blitTriangles = 2;
@@ -307,6 +308,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			if (bodyA == c->data && bodyB == c2->data)
 			{
+				App->audio->PlayFx(hit_circle_fx);
 				blitTemp = 1.0f;
 				if (c2->data == App->physics->circles.getFirst()->data) { blitCircles = 1; }
 				else if (c->data->body->GetTransform().p.x > 7 && c->data->body->GetTransform().p.y < 4.22f) { blitCircles = 2; }
@@ -335,6 +337,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				else if (s->data == sensor && kickerActive == false) {
 					resetPos = true;
 				}
+
 				if (s->data == App->player->doorOpenCol) doorOpen = 2.0f;
 			}
 			s = s->next;
