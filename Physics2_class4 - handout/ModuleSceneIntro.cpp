@@ -39,6 +39,7 @@ bool ModuleSceneIntro::Start()
 	BrightRound = App->textures->Load("pinball/Round_coll.png");
 	BrightTriangular = App->textures->Load("pinball/Bright_Triangular_collider.png");
 	tube = App->textures->Load("pinball/tube.png");
+	lights = App->textures->Load("pinball/Pinball_SritesheetLights.png");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
 	//sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
@@ -47,6 +48,7 @@ bool ModuleSceneIntro::Start()
 	sensor_changeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
 	sensor_changeSprite2 = App->physics->CreateRectangleSensor(385, 360, 40, 28);
 	sensor_changeSprite2_out = App->physics->CreateRectangleSensor(410, 750, 40, 28);
+	sensorLights = App->physics->CreateRectangleSensor(320, 90, 120, 22);
 
 	int size = 8;
 	door = App->physics->CreateChain(1, 1, Pinball_door, size, b2_staticBody);
@@ -103,6 +105,7 @@ update_status ModuleSceneIntro::Update()
 			App->audio->PlayFx(notCool_fx);
 			circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
 			circles.getFirst()->data->body->SetTransform(*initialPos, 0);
+			Lights = false;
 			resetPos = false;
 		}
 	}
@@ -279,6 +282,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (tunel_2_enabled == false) { App->renderer->Blit(backgroundUpBall, 0, 0, NULL); }
 	if (tunel_2_enabled == true) { App->renderer->Blit(tube, 0, 0, NULL); }
+	if (Lights == true) { App->renderer->Blit(lights, 0, 0, NULL); }
 
 	return UPDATE_CONTINUE;
 }
@@ -343,6 +347,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					c->data->body->ApplyForceToCenter(*tunel2force, false);
 					sensorStop = 3;
 					points += tunelPoints;
+				}
+				if (s->data == sensorLights) {
+					points += LightsPoints;
+					Lights = true;
 				}
 				if (s->data == sensor_changeSprite2_out) tunel_2_enabled = false;
 				if (s->data == App->player->kickerSensor) kickerActive = true;

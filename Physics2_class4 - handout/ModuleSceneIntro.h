@@ -36,6 +36,8 @@ public:
 	PhysBody* sensor;
 	PhysBody* sensor2;
 	PhysBody* sensor3;
+	PhysBody* sensorLights;
+	bool Lights;
 	PhysBody* sensor_changeSprite;
 	PhysBody* sensor_changeSprite_out;
 	PhysBody* sensor_changeSprite2;
@@ -47,10 +49,11 @@ public:
 	float sensorStop = 0;
 
 	int points = 0;
-	int circlePoints = 20;
-	int tunelPoints = 50;
-	int trianglePoints = 10;
-	int gravityPoints = 20;
+	int circlePoints = 2000;
+	int tunelPoints = 5000;
+	int trianglePoints = 1000;
+	int gravityPoints = 2000;
+	int LightsPoints = 2000;
 
 
 	int blitTriangles = 0;
@@ -65,6 +68,7 @@ public:
 
 	SDL_Texture*backgroundUpBall;
 	SDL_Texture*tube;
+	SDL_Texture*lights;
 
 
 	SDL_Texture* circle;
