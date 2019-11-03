@@ -57,6 +57,7 @@ public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> sensors;
 
+	void NoGravity(b2Body *body);
 
 	b2World* world;
 

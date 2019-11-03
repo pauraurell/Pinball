@@ -39,9 +39,9 @@ bool ModuleSceneIntro::Start()
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 	//sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
-	//sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
-	sensor_changeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
-	sensor_changeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
+	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
+	sensor_cahngeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
+	sensor_cahngeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
 
 	initialPos = new b2Vec2(10, 15);
 
@@ -296,11 +296,16 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			if (bodyA == c->data && bodyB == s->data)
 			{
 				blitTemp = 1.0f;
-				if (s->data->body->GetTransform().p.x < 4) tunel_visible = true;
-				if (s->data == sensor_changeSprite_out) tunel_visible = false;
+				if (s->data == sensor_cahngeSprite) tunel_visible = true;
+				if (s->data == sensor_cahngeSprite_out) tunel_visible = false;
 				if (s->data == App->player->kickerSensor) kickerActive = true;
 				else kickerActive = false;
 				collided = true;
+
+				if (s->data == sensor3) 
+				{
+					App->physics->NoGravity(c->data->body);
+				}
 			}
 			s = s->next;
 		}
