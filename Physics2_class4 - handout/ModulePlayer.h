@@ -40,6 +40,6 @@ public:
 
 	PhysBody* kickerBody;
 	PhysBody* kickerSensor;
-	PhysBody* kickerSensorDeactivator;
+	PhysBody* doorOpenCol;
 
 };

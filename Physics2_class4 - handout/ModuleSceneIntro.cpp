@@ -45,6 +45,9 @@ bool ModuleSceneIntro::Start()
 
 	initialPos = new b2Vec2(10, 15);
 
+	int size = 8;
+	door = App->physics->CreateChain(1, 1, Pinball_door, size, b2_staticBody);
+
 	return ret;
 }
 
@@ -202,6 +205,17 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 	
+	if (doorOpen > 1) {
+		door->body->SetTransform(*initialPos, 0);
+		if (doorOpen <= 1.5f) {
+			door->body->SetTransform(b2Vec2_zero, 0);
+			doorOpen = 0;
+		}
+		else {
+			doorOpen -= 0.01f;
+		}
+	}
+
 	if (sensorStop > 1) {
 		if (sensorStop <= 1.5f) {
 			App->physics->NoGravity(circles.getFirst()->data->body);
@@ -321,6 +335,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				else if (s->data == sensor && kickerActive == false) {
 					resetPos = true;
 				}
+				if (s->data == App->player->doorOpenCol) doorOpen = 2.0f;
 			}
 			s = s->next;
 		}

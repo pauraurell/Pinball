@@ -56,7 +56,7 @@ bool ModulePlayer::Start()
 	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody, 1.0f, 10.0f);
 	//kickerBody = App->physics->CreateRectangle(kickerPos.x, kickerPos.y, 25, 5, b2_dynamicBody, 0);
 	kickerSensor = App->physics->CreateRectangleSensor(kickerPos.x + 8, kickerPos.y - 7, 25, 25);
-	kickerSensorDeactivator = App->physics->CreateRectangleSensor(kickerPos.x + 8, kickerPos.y - 200, 25, 5);
+	doorOpenCol = App->physics->CreateRectangleSensor(kickerPos.x + 8, kickerPos.y - 200, 25, 5);
 	
 	//Joint left lever
 	b2RevoluteJointDef def;

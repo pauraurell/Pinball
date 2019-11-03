@@ -25,8 +25,13 @@ public:
 
 	PhysBody* kicker;
 
-	/*PhysBody* door;
-	bool closed;*/
+	PhysBody* door;
+	int Pinball_door[8] = {
+		477, 452,
+		500, 423,
+		505, 428,
+		483, 455
+	};
 
 	PhysBody* sensor;
 	PhysBody* sensor2;
@@ -36,6 +41,7 @@ public:
 	bool sensed;
 	bool kickerActive = false;
 	bool resetPos = false;
+	float doorOpen = 0;
 	float sensorStop = 0;
 
 	int blitTriangles = 0;
