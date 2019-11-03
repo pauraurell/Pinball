@@ -47,6 +47,12 @@ public:
 	float sensorStop = 0;
 
 	int points = 0;
+	int circlePoints = 20;
+	int tunelPoints = 50;
+	int trianglePoints = 10;
+	int gravityPoints = 20;
+
+
 	int blitTriangles = 0;
 	int blitCircles = 0;
 	float blitTemp = 0;

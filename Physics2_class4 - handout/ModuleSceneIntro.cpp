@@ -72,12 +72,6 @@ update_status ModuleSceneIntro::Update()
 {
 	 App->renderer->Blit(background, 0, 0, NULL);
 
-	if (tunel_visible == true)
-	{
-		App->renderer->Blit(tunel, 0, 0, NULL);
-	}
-
-
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		ray_on = !ray_on;
@@ -173,6 +167,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	
 	if (tunel_visible) {
+		App->renderer->Blit(tunel, 0, 0, NULL);
 		p2List_item<PhysBody*>* w = App->physics->walls.getFirst();
 		while (w != NULL)
 		{
@@ -303,11 +298,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			if (bodyA == c->data && bodyB == t->data)
 			{
-
+				points += trianglePoints;
 				blitTemp = 1.0f;
 				if (c->data->body->GetTransform().p.x < 4) blitTriangles = 1;
 				else blitTriangles = 2;
 				collided = true;
+				LOG("Points: %i", points);
 			}
 			t = t->next;
 		}
@@ -316,12 +312,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			if (bodyA == c->data && bodyB == c2->data)
 			{
 				App->audio->PlayFx(hit_circle_fx);
+				points += circlePoints;
 				blitTemp = 1.0f;
 				if (c2->data == App->physics->circles.getFirst()->data) { blitCircles = 1; }
 				else if (c->data->body->GetTransform().p.x > 7 && c->data->body->GetTransform().p.y < 4.22f) { blitCircles = 2; }
 				else { blitCircles = 3; }
-				//App->renderer->Blit(BrightRound, c2->data->body->GetPosition().x, c2->data->body->GetPosition().y, NULL, 1.0f);
 				collided = true;
+				LOG("Points: %i", points);
 			}
 			c2 = c2->next;
 		}
@@ -335,21 +332,25 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					if(sensorStop == 0)	App->physics->NoGravity(c->data->body);
 					c->data->body->ApplyForceToCenter(*tunel1force, false);
 					sensorStop = 3;
+					points += tunelPoints;
 				}
-				if (s->data == sensor_changeSprite_out) tunel_visible = false;
+				if (s->data == sensor_changeSprite_out) tunel_visible = false; 
 				if (s->data == sensor_changeSprite2) { 
 					tunel_2_enabled = true;
 					if (sensorStop == 0) App->physics->NoGravity(c->data->body);
 					c->data->body->ApplyForceToCenter(*tunel2force, false);
 					sensorStop = 3;
+					points += tunelPoints;
 				}
 				if (s->data == sensor_changeSprite2_out) tunel_2_enabled = false;
 				if (s->data == App->player->kickerSensor) kickerActive = true;
 				else kickerActive = false;
 				collided = true;
+				LOG("Points: %i", points);
 
 				if (s->data == sensor3 && sensorStop == 0) 
 				{
+					points += gravityPoints;
 					App->physics->NoGravity(c->data->body);
 					sensorStop = 3;
 				}
@@ -361,18 +362,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			}
 			s = s->next;
 		}
-		/*while (w != NULL && collided == false)
-		{
-			if (bodyA == c->data && bodyB == w->data)
-			{
-				kickerActive = true;
-				collided = true;
-			}
-			else { kickerActive = false; }
-			w = w->next;
-		}*/
+
 		collided = false;
 		c = c->next;
 	}
-	
 }
