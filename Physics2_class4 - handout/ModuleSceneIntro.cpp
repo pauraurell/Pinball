@@ -44,6 +44,8 @@ bool ModuleSceneIntro::Start()
 	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
 	sensor_changeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
 	sensor_changeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
+	sensor_changeSprite2 = App->physics->CreateRectangleSensor(380, 390, 40, 28);
+	sensor_changeSprite2_out = App->physics->CreateRectangleSensor(410, 750, 40, 28);
 
 	int size = 8;
 	door = App->physics->CreateChain(1, 1, Pinball_door, size, b2_staticBody);
@@ -236,6 +238,15 @@ update_status ModuleSceneIntro::Update()
 		App->physics->tunelCol->body->SetTransform(*outPos, 0);
 	}
 
+	if (tunel_2_enabled) {
+		App->physics->tunel2Col->body->SetTransform(b2Vec2_zero, 0);
+		App->physics->tunel2Col_interior->body->SetTransform(b2Vec2_zero, 0);
+	}
+	else {
+		App->physics->tunel2Col_interior->body->SetTransform(*outPos, 0);
+		App->physics->tunel2Col->body->SetTransform(*outPos, 0);
+	}
+
 	if (doorOpen > 1) {
 		door->body->SetTransform(*initialPos, 0);
 		if (doorOpen <= 1.5f) {
@@ -353,6 +364,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				blitTemp = 1.0f;
 				if (s->data == sensor_changeSprite) tunel_visible = true;
 				if (s->data == sensor_changeSprite_out) tunel_visible = false;
+				if (s->data == sensor_changeSprite2) tunel_2_enabled = true;
+				if (s->data == sensor_changeSprite2_out) tunel_2_enabled = false;
 				if (s->data == App->player->kickerSensor) kickerActive = true;
 				else kickerActive = false;
 				collided = true;
