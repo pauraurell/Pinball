@@ -92,7 +92,7 @@ bool ModulePhysics::Start()
 		140, 782
 	};
 	size = 18;
-	CreateChain(x, y, triangleLeft, size, b2_staticBody, 1.0f, 2);
+	triangles.add(CreateChain(x, y, triangleLeft, size, b2_staticBody, 1.0f, 2));
 
 	int triangleRight[20] = {
 		401, 759,
@@ -107,7 +107,7 @@ bool ModulePhysics::Start()
 		356, 780
 	};
 	size = 20;
-	CreateChain(x, y, triangleRight, size, b2_staticBody, 1.0f, 2);
+	triangles.add(CreateChain(x, y, triangleRight, size, b2_staticBody, 1.0f, 2));
 
 	int leftWall[20] = {
 		48, 686,
@@ -344,9 +344,9 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type,
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = radius;
 
-	if (list = 1) { walls.add(pbody); }
-	if (list = 2) { triangles.add(pbody); }
-	if (list = 3) { circles.add(pbody); }
+	if (list == 1) { walls.add(pbody); }
+	//if (list = 2) { triangles.add(pbody); }
+	if (list == 3) { circles.add(pbody); }
 
 	return pbody;
 }
@@ -406,9 +406,9 @@ PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2Bo
 	pbody->body = b;
 	b->SetUserData(pbody);
 
-	if (list = 1) { walls.add(pbody); }
-	if (list = 2) { triangles.add(pbody); }
-	if (list = 3) { circles.add(pbody); }
+	if (list == 1) { walls.add(pbody); }
+	//if (list = 2) { triangles.add(pbody); }
+	if (list == 3) { circles.add(pbody); }
 
 	return pbody;
 }
@@ -472,9 +472,9 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2Body
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = 0;
 
-	if (list = 1) { walls.add(pbody); }
-	if (list = 2) { triangles.add(pbody); }
-	if (list = 3) { circles.add(pbody); }
+	if (list == 1) { walls.add(pbody); }
+	//if (list = 2) { triangles.add(pbody); }
+	if (list == 3) { circles.add(pbody); }
 
 	return pbody;
 }

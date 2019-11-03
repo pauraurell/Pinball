@@ -40,6 +40,8 @@ bool ModuleSceneIntro::Start()
 	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
 	sensor_cahngeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
 
+	initialPos = new b2Vec2(10, 15);
+
 	return ret;
 }
 
@@ -86,6 +88,10 @@ update_status ModuleSceneIntro::Update()
 		
 	 	if (tunel_visible == false){tunel_visible = true;}
 		else if (tunel_visible == true) { tunel_visible = false; }
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
+		circles.getFirst()->data->body->SetTransform(*initialPos, 0);
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
@@ -197,7 +203,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	App->audio->PlayFx(hit_fx);
 	bool collided = false;
-	/*
+	
 	p2List_item<PhysBody*>* c = circles.getFirst();
 	p2List_item<PhysBody*>* t = App->physics->triangles.getFirst();
 	p2List_item<PhysBody*>* c2 = App->physics->circles.getFirst();
@@ -209,13 +215,14 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			if (bodyA == c->data && bodyB == t->data)
 			{
 				App->renderer->Blit(BrightTriangular, t->data->body->GetPosition().x, t->data->body->GetPosition().y, NULL, 1.0f);
+				LOG("Collided");
 				collided = true;
 			}
 			t = t->next;
 		}
 		while (c2 != NULL && collided == false)
 		{
-			if (bodyA == c->data && bodyB == t->data)
+			if (bodyA == c->data && bodyB == c2->data)
 			{
 				App->renderer->Blit(BrightRound, c2->data->body->GetPosition().x, c2->data->body->GetPosition().y, NULL, 1.0f);
 				collided = true;
@@ -224,7 +231,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 		collided = false;
 		c = c->next;
-	}*/
+	}
 	
 	//if (bodyA == App->physics->circle) { App->renderer->Blit(BrightRound, App->physics->circle->body->GetPosition().x, App->physics->circle->body->GetPosition().y, NULL); }
 

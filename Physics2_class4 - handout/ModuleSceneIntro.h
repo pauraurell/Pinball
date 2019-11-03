@@ -5,6 +5,7 @@
 #include "Globals.h"
 
 class PhysBody;
+class b2Vec2;
 
 class ModuleSceneIntro : public Module
 {
@@ -29,6 +30,8 @@ public:
 	PhysBody* sensor3;
 	PhysBody* sensor_cahngeSprite;
 	bool sensed;
+
+	b2Vec2* initialPos = nullptr;
 
 	SDL_Texture* circle;
 	SDL_Texture* box;
