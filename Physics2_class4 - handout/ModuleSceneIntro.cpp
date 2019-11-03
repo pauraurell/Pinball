@@ -91,7 +91,10 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
-		circles.getFirst()->data->body->SetTransform(*initialPos, 0);
+		if (circles.getFirst() != NULL)
+		{
+			circles.getFirst()->data->body->SetTransform(*initialPos, 0);
+		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
