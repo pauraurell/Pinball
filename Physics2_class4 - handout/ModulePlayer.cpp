@@ -105,7 +105,10 @@ update_status ModulePlayer::Update()
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
-		kickerPos.y++;
+		if (kickerPos.y < 845)
+		{
+			kickerPos.y++;
+		}
 	}
 
 	else  {
