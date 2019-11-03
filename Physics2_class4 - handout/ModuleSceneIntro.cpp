@@ -58,7 +58,9 @@ bool ModuleSceneIntro::Start()
 
 	tunel1force = new b2Vec2(-70, -90);
 	tunel2force = new b2Vec2(30, -100);
-	
+
+	circles.add(App->physics->CreateCircle(METERS_TO_PIXELS(initialPos->x), METERS_TO_PIXELS(initialPos->y) + 10, 12, b2_dynamicBody, 0.4f));
+	circles.getLast()->data->listener = this;
 	return ret;
 }
 
@@ -102,7 +104,6 @@ update_status ModuleSceneIntro::Update()
 	if (resetPos || App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
 		if (circles.getFirst() != NULL)
 		{
-			App->audio->PlayFx(notCool_fx);
 			circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
 			circles.getFirst()->data->body->SetTransform(*initialPos, 0);
 			Lights = false;
@@ -366,6 +367,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				else if (s->data == sensor && kickerActive == false) {
 					resetPos = true;
+					App->audio->PlayFx(notCool_fx);
 				}
 
 				if (s->data == App->player->doorOpenCol) doorOpen = 2.0f;
