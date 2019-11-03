@@ -55,6 +55,8 @@ public:
 	p2List<PhysBody*> walls;
 	p2List<PhysBody*> triangles;
 	p2List<PhysBody*> circles;
+	p2List<PhysBody*> sensors;
+
 
 	b2World* world;
 

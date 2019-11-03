@@ -29,6 +29,7 @@ public:
 	PhysBody* sensor2;
 	PhysBody* sensor3;
 	PhysBody* sensor_cahngeSprite;
+	PhysBody* sensor_cahngeSprite_out;
 	bool sensed;
 
 	int blitTriangles = 0;
@@ -36,6 +37,8 @@ public:
 	float blitTemp = 0;
 
 	b2Vec2* initialPos = nullptr;
+
+	SDL_Texture*backgroundUpBall;
 
 	SDL_Texture* circle;
 	SDL_Texture* box;
