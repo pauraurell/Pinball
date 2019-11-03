@@ -31,6 +31,9 @@ public:
 	PhysBody* sensor_cahngeSprite;
 	bool sensed;
 
+	int blitTriangles = 0;
+	float blitTemp = 0;
+
 	b2Vec2* initialPos = nullptr;
 
 	SDL_Texture* circle;

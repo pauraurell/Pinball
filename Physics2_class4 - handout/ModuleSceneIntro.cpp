@@ -195,6 +195,24 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 	
+	if (blitTriangles == 1) {
+		if (blitTemp <= 0) {
+			blitTriangles = 0;
+		}
+		else {
+			App->renderer->Blit(BrightTriangular, 85, 680, NULL, 1.0f);
+			blitTemp -= 0.1f;
+		}
+	}
+	if (blitTriangles == 2) {
+		if (blitTemp <= 0) {
+			blitTriangles = 0;
+		}
+		else {
+			App->renderer->Blit(BrightTriangular, 340, 680, NULL, 1.0f, 0, INT_MAX, INT_MAX, SDL_FLIP_HORIZONTAL);
+			blitTemp -= 0.1f;
+		}
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -214,8 +232,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			if (bodyA == c->data && bodyB == t->data)
 			{
-				App->renderer->Blit(BrightTriangular, t->data->body->GetPosition().x, t->data->body->GetPosition().y, NULL, 1.0f);
-				LOG("Collided");
+				blitTemp = 1.0f;
+				if(c->data->body->GetTransform().p.x < 4) blitTriangles = 1;
+				else blitTriangles = 2;
 				collided = true;
 			}
 			t = t->next;
