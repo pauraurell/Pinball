@@ -27,4 +27,4 @@ F1 -> Show colliders.
 
 Diferences: 
 -Our points are printed in the window title.
--
+-Not all point triggers added.
