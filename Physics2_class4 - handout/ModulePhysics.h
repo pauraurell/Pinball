@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "p2Point.h"
 #include "Box2D/Box2D/Box2D.h"
 
 
@@ -43,11 +44,11 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, float restitution = 0.0f, int list = 1);
+	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, float restitution = 0.0f);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type, float density = 1.0f);
-	PhysBody* CreatePolygon(int x, int y, int* points, int size, b2BodyType type, float restitution = 0.0f, float gravity = 1.0f, int list = 1);
+	PhysBody* CreatePolygon(int x, int y, int* points, int size, b2BodyType type, float restitution = 0.0f, float gravity = 1.0f);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
-	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type, float restitution = 0.0f, int list = 1);
+	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type, float restitution = 0.0f);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
@@ -63,6 +64,8 @@ public:
 	PhysBody* tunelCol = nullptr;
 	PhysBody* tunel2Col = nullptr;
 	PhysBody*tunel2Col_interior = nullptr;
+
+	iPoint ball3pos;
 
 private:
 

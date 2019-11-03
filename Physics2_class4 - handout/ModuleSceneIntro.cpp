@@ -211,9 +211,30 @@ update_status ModuleSceneIntro::Update()
 	}
 	
 	if (tunel_visible) {
+		p2List_item<PhysBody*>* w = App->physics->walls.getFirst();
+		while (w != NULL)
+		{
+			w->data->body->SetTransform(*outPos, 0);
+			w = w->next;
+		}
+		PhysBody* data_;
+		App->physics->circles.at(2, data_);
+		data_->body->SetTransform(*outPos, 0);
 		App->physics->tunelCol->body->SetTransform(b2Vec2_zero, 0);
 	}
 	else {
+		p2List_item<PhysBody*>* w = App->physics->walls.getFirst();
+		
+		while (w != NULL)
+		{
+			w->data->body->SetTransform(b2Vec2_zero, 0);
+			w = w->next;
+		}
+		PhysBody* data_;
+		b2Vec2* temp = new b2Vec2(PIXEL_TO_METERS(App->physics->ball3pos.x), PIXEL_TO_METERS(App->physics->ball3pos.y));
+		App->physics->circles.at(2, data_);
+		data_->body->SetTransform(*temp, 0);
+
 		App->physics->tunelCol->body->SetTransform(*outPos, 0);
 	}
 
