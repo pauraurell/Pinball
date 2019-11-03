@@ -109,7 +109,14 @@ update_status ModulePlayer::Update()
 	}
 
 	else  {
-		kickerPos.y = 780;
+		if (kickerPos.y > 780)
+		{
+			kickerPos.y -= 15;
+		}
+		if (kickerPos.y < 780)
+		{
+			kickerPos.y = 780;
+		}
 	}
 
 
