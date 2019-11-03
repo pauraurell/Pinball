@@ -63,6 +63,8 @@ public:
 	uint bonus_fx;
 	uint hit_fx;
 	uint hit_circle_fx;
+	uint notCool_fx;
+
 	p2Point<int> ray;
 	bool ray_on;
 

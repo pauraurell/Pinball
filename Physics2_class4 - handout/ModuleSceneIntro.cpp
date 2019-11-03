@@ -32,6 +32,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	hit_fx = App->audio->LoadFx("pinball/hit.ogg");
 	hit_circle_fx = App->audio->LoadFx("pinball/Track2.wav");
+	notCool_fx = App->audio->LoadFx("pinball/Track3.wav");
 	background = App->textures->Load("pinball/Pinball_Sritesheet.png");
 	backgroundUpBall = App->textures->Load("pinball/ElementsUpTheBall.png");
 	tunel = App->textures->Load("pinball/Pinball_Tunel.png");
@@ -99,6 +100,7 @@ update_status ModuleSceneIntro::Update()
 	if (resetPos || App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
 		if (circles.getFirst() != NULL)
 		{
+			App->audio->PlayFx(notCool_fx);
 			circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
 			circles.getFirst()->data->body->SetTransform(*initialPos, 0);
 			resetPos = false;
