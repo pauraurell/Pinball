@@ -29,6 +29,7 @@ public:
 	PhysBody* sensor2;
 	PhysBody* sensor3;
 	PhysBody* sensor_cahngeSprite;
+	PhysBody* sensor_cahngeSprite_out;
 	bool sensed;
 
 	int blitTriangles = 0;

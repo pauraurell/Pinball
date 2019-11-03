@@ -37,9 +37,10 @@ bool ModuleSceneIntro::Start()
 	BrightTriangular = App->textures->Load("pinball/Bright_Triangular_collider.png");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
-	sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
-	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
+	//sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
+	//sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
 	sensor_cahngeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
+	sensor_cahngeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
 
 	initialPos = new b2Vec2(10, 15);
 
@@ -230,6 +231,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	p2List_item<PhysBody*>* c = circles.getFirst();
 	p2List_item<PhysBody*>* t = App->physics->triangles.getFirst();
 	p2List_item<PhysBody*>* c2 = App->physics->circles.getFirst();
+	p2List_item<PhysBody*>* s = App->physics->sensors.getFirst();
+
+	
+
 
 	while (c != NULL)
 	{
@@ -238,7 +243,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			if (bodyA == c->data && bodyB == t->data)
 			{
 				blitTemp = 1.0f;
-				if(c->data->body->GetTransform().p.x < 4) blitTriangles = 1;
+				if (c->data->body->GetTransform().p.x < 4) blitTriangles = 1;
 				else blitTriangles = 2;
 				collided = true;
 			}
@@ -252,6 +257,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				collided = true;
 			}
 			c2 = c2->next;
+		}
+		
+		while (s != NULL && collided == false)
+		{
+			if (bodyA == c->data && bodyB == s->data)
+			{
+				blitTemp = 1.0f;
+				if (s->data->body->GetTransform().p.x < 4) tunel_visible = true;
+				if (s->data == sensor_cahngeSprite_out) tunel_visible = false;
+				collided = true;
+			}
+			s = s->next;
 		}
 		collided = false;
 		c = c->next;
