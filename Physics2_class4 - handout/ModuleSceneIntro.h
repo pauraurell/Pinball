@@ -58,6 +58,8 @@ public:
 	b2Vec2* tunel2force = nullptr;
 
 	SDL_Texture*backgroundUpBall;
+	SDL_Texture*tube;
+
 
 	SDL_Texture* circle;
 	SDL_Texture* box;

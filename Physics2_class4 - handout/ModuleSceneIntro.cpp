@@ -38,6 +38,7 @@ bool ModuleSceneIntro::Start()
 	tunel = App->textures->Load("pinball/Pinball_Tunel.png");
 	BrightRound = App->textures->Load("pinball/Round_coll.png");
 	BrightTriangular = App->textures->Load("pinball/Bright_Triangular_collider.png");
+	tube = App->textures->Load("pinball/tube.png");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
 	//sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
@@ -281,7 +282,8 @@ update_status ModuleSceneIntro::Update()
 			blitTemp -= 0.1f;
 		}
 	}
-	App->renderer->Blit(backgroundUpBall, 0, 0, NULL);
+	if (tunel_2_enabled == false) { App->renderer->Blit(backgroundUpBall, 0, 0, NULL); }
+	if (tunel_2_enabled == true) { App->renderer->Blit(tube, 0, 0, NULL); }
 
 	return UPDATE_CONTINUE;
 }
