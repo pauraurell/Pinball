@@ -41,6 +41,7 @@ public:
 	PhysBody* sensor;
 	PhysBody* sensor2;
 	PhysBody* sensor3;
+	PhysBody* sensor4;
 	PhysBody* sensorLights;
 	bool Lights;
 	PhysBody* sensor_changeSprite;

@@ -48,6 +48,7 @@ bool ModuleSceneIntro::Start()
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
 	sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
 	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
+	sensor4 = App->physics->CreateRectangleSensor(460, 600, 28, 28);
 	sensor_changeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
 	sensor_changeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
 	sensor_changeSprite2 = App->physics->CreateRectangleSensor(385, 360, 40, 28);
@@ -413,7 +414,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					App->physics->NoGravity(c->data->body);
 					sensorStop = 3;
 				}
-				else if (s->data == sensor2) {
+				else if (s->data == sensor2 || s->data == sensor4) {
 					points += teleporterPoints;
 					tele = true;
 				}
