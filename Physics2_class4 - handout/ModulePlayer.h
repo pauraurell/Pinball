@@ -27,6 +27,7 @@ public:
 	iPoint leftLever;
 	iPoint rightLever;
 	b2Vec2 kickerPos;
+	float kickerCounter = 0;
 
 	PhysBody* joint1;
 	PhysBody* joint2;

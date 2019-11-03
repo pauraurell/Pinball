@@ -4,6 +4,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModulePhysics.h"
+#include "ModuleSceneIntro.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -123,6 +124,11 @@ update_status ModulePlayer::Update()
 		if (kickerPos.y < 845)
 		{
 			kickerPos.y += 2;
+			
+			if (kickerCounter < 56)
+			{
+				kickerCounter += 2;
+			}
 		}
 	}
 
@@ -138,7 +144,12 @@ update_status ModulePlayer::Update()
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
-		kickerBody->body->ApplyLinearImpulse({ 0, 60 }, kickerBody->body->GetWorldCenter(), true);
+		if (App->scene_intro->circles.getFirst() != NULL)
+		{
+			//kickerBody->body->ApplyLinearImpulse({ 0, 60 }, kickerBody->body->GetWorldCenter(), true);
+			App->scene_intro->circles.getFirst()->data->body->ApplyLinearImpulse({ 0, kickerCounter / 8 }, App->scene_intro->circles.getFirst()->data->body->GetWorldCenter(), true);
+			kickerCounter = 0;
+		}
 	}
 
 	if (Draw()) {
