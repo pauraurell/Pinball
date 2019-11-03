@@ -43,6 +43,7 @@ public:
 	bool sensed;
 	bool kickerActive = false;
 	bool resetPos = false;
+	bool tele = false;
 	float doorOpen = 0;
 	float sensorStop = 0;
 
@@ -51,7 +52,7 @@ public:
 	int tunelPoints = 50;
 	int trianglePoints = 10;
 	int gravityPoints = 20;
-
+	int teleporterPoints = 30;
 
 	int blitTriangles = 0;
 	int blitCircles = 0;
@@ -59,6 +60,7 @@ public:
 
 	b2Vec2* initialPos = nullptr;
 	b2Vec2* outPos = nullptr;
+	b2Vec2* teleportPos = nullptr;
 
 	b2Vec2* tunel1force = nullptr;
 	b2Vec2* tunel2force = nullptr;

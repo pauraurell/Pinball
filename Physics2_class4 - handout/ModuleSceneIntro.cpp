@@ -41,7 +41,7 @@ bool ModuleSceneIntro::Start()
 	tube = App->textures->Load("pinball/tube.png");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
-	//sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
+	sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
 	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
 	sensor_changeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
 	sensor_changeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
@@ -53,10 +53,11 @@ bool ModuleSceneIntro::Start()
 
 	initialPos = new b2Vec2(10, 15);
 	outPos = new b2Vec2(300, 0);
+	teleportPos = new b2Vec2(1.5f, 12.5f);
 
 	tunel1force = new b2Vec2(-70, -90);
 	tunel2force = new b2Vec2(30, -100);
-	
+
 	return ret;
 }
 
@@ -72,6 +73,10 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	 App->renderer->Blit(background, 0, 0, NULL);
+
+	 if (tunel_visible) {
+		 App->renderer->Blit(tunel, 0, 0, NULL);
+	 }
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -100,7 +105,6 @@ update_status ModuleSceneIntro::Update()
 	if (resetPos || App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
 		if (circles.getFirst() != NULL)
 		{
-			App->audio->PlayFx(notCool_fx);
 			circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
 			circles.getFirst()->data->body->SetTransform(*initialPos, 0);
 			resetPos = false;
@@ -168,7 +172,6 @@ update_status ModuleSceneIntro::Update()
 	}
 	
 	if (tunel_visible) {
-		App->renderer->Blit(tunel, 0, 0, NULL);
 		p2List_item<PhysBody*>* w = App->physics->walls.getFirst();
 		while (w != NULL)
 		{
@@ -210,7 +213,11 @@ update_status ModuleSceneIntro::Update()
 		App->physics->tunel2Col_interior->body->SetTransform(*outPos, 0);
 		App->physics->tunel2Col->body->SetTransform(*outPos, 0);
 	}
-
+	if (tele) {
+		circles.getFirst()->data->body->SetTransform(*teleportPos, 0);
+		circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
+		tele = false;
+	}
 	if (doorOpen > 1) {
 		door->body->SetTransform(*initialPos, 0);
 		if (doorOpen <= 1.5f) {
@@ -356,7 +363,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					App->physics->NoGravity(c->data->body);
 					sensorStop = 3;
 				}
+				else if (s->data == sensor2) {
+					points += teleporterPoints;
+					tele = true;
+				}
 				else if (s->data == sensor && kickerActive == false) {
+					App->audio->PlayFx(notCool_fx);
 					resetPos = true;
 				}
 
