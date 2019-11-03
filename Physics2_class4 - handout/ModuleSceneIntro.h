@@ -32,6 +32,7 @@ public:
 	PhysBody* sensor_changeSprite_out;
 	bool sensed;
 	bool kickerActive = false;
+	float sensorStop = 0;
 
 	int blitTriangles = 0;
 	int blitCircles = 0;

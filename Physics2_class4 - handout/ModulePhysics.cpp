@@ -697,5 +697,10 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 
 void ModulePhysics::NoGravity(b2Body* body)
 {
-	body->SetGravityScale(0.0f);
+	if (body->GetGravityScale() == 0) {
+		body->SetGravityScale(1.0f);
+	}
+	else {
+		body->SetGravityScale(0.0f);
+	}
 }

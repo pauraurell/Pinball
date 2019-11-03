@@ -201,6 +201,16 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 	
+	if (sensorStop > 1) {
+		if (sensorStop <= 1.5f) {
+			App->physics->NoGravity(circles.getFirst()->data->body);
+			sensorStop = 0;
+		}
+		else {
+			sensorStop -= 0.01f;
+		}
+	}
+
 	if (blitTriangles == 1) {
 		if (blitTemp <= 0) {
 			blitTriangles = 0;
@@ -305,6 +315,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (s->data == sensor3) 
 				{
 					App->physics->NoGravity(c->data->body);
+					sensorStop = 3;
 				}
 			}
 			s = s->next;
