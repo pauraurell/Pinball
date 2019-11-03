@@ -1,12 +1,14 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRender.h"
+#include "ModuleWindow.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
+#include "p2SString.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -75,7 +77,11 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	 App->renderer->Blit(background, 0, 0, NULL);
+	p2SString title("Pinball || Score: %d",points);
+
+	App->window->SetTitle(title.GetString());
+	App->renderer->Blit(background, 0, 0, NULL);
+	if(tunel_visible)App->renderer->Blit(tunel, 0, 0, NULL);
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -172,7 +178,6 @@ update_status ModuleSceneIntro::Update()
 	}
 	
 	if (tunel_visible) {
-		App->renderer->Blit(tunel, 0, 0, NULL);
 		p2List_item<PhysBody*>* w = App->physics->walls.getFirst();
 		while (w != NULL)
 		{
