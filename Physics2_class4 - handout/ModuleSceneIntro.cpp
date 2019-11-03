@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
+#include "ModuleFonts.h"
 #include "p2SString.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -42,6 +43,7 @@ bool ModuleSceneIntro::Start()
 	BrightTriangular = App->textures->Load("pinball/Bright_Triangular_collider.png");
 	tube = App->textures->Load("pinball/tube.png");
 	lights = App->textures->Load("pinball/Pinball_SritesheetLights.png");
+	fontID = App->fonts->Load("pinball/Fonts.png", "0123456789", 1, 22, 33, 10);
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
 	sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
@@ -80,8 +82,8 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	p2SString title("Pinball || Score: %d",points);
-
+	p2SString title("Pinball");
+	
 	App->window->SetTitle(title.GetString());
 	App->renderer->Blit(background, 0, 0, NULL);
 	if(tunel_visible)App->renderer->Blit(tunel, 0, 0, NULL);
@@ -300,6 +302,9 @@ update_status ModuleSceneIntro::Update()
 	if (tunel_2_enabled == false) { App->renderer->Blit(backgroundUpBall, 0, 0, NULL); }
 	if (tunel_2_enabled == true) { App->renderer->Blit(tube, 0, 0, NULL); }
 	if (Lights == true) { App->renderer->Blit(lights, 0, 0, NULL); }
+
+	SDL_snprintf(pointsText, 10, "%d", points);
+	App->fonts->BlitText(600, 400, fontID, pointsText);
 
 	return UPDATE_CONTINUE;
 }

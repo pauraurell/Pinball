@@ -50,6 +50,8 @@ public:
 	float sensorStop = 0;
 
 	int points = 0;
+	int fontID = -1;
+	char pointsText[10];
 
 	int circlePoints = 2000;
 	int tunelPoints = 5000;
