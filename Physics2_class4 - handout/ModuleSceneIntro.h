@@ -46,6 +46,7 @@ public:
 	float doorOpen = 0;
 	float sensorStop = 0;
 
+	int points = 0;
 	int blitTriangles = 0;
 	int blitCircles = 0;
 	float blitTemp = 0;

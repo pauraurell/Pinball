@@ -42,4 +42,5 @@ public:
 	PhysBody* kickerSensor;
 	PhysBody* doorOpenCol;
 
+	
 };

@@ -75,19 +75,7 @@ bool ModulePlayer::Start()
 	rightJoint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&def);
 
 	b2PrismaticJointDef def2;
-	//def2.Initialize(kickerJoint->body, kickerBody->body, kickerJoint->body->GetWorldCenter(), { 0, 1 });
-	/*def2.bodyA = joint3->body;
-	def2.bodyB = kickerBody->body;
-	def2.localAnchorA = joint3->body->GetWorldCenter();
-	def2.localAnchorB = kickerBody->body->GetWorldCenter();
-	def2.localAxisA = { 0, 1 };
-	def2.collideConnected = false;
-	def2.enableLimit = true;
-	def2.lowerTranslation = PIXEL_TO_METERS(499);
-	def2.upperTranslation = PIXEL_TO_METERS(471);
-	//def2.maxMotorForce = 150;
-	kickerJoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&def2);*/
-
+	
 	return true;
 }
 
