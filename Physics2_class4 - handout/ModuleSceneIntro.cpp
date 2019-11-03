@@ -36,6 +36,9 @@ bool ModuleSceneIntro::Start()
 	BrightTriangular = App->textures->Load("pinball/Bright_Triangular_collider.png");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+	sensor2 = App->physics->CreateRectangleSensor(155, 232, 28, 28);
+	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
+	sensor_cahngeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
 
 	return ret;
 }
@@ -194,7 +197,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	App->audio->PlayFx(hit_fx);
 	bool collided = false;
-
+	/*
 	p2List_item<PhysBody*>* c = circles.getFirst();
 	p2List_item<PhysBody*>* t = App->physics->triangles.getFirst();
 	p2List_item<PhysBody*>* c2 = App->physics->circles.getFirst();
@@ -221,7 +224,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 		collided = false;
 		c = c->next;
-	}
+	}*/
 	
 	//if (bodyA == App->physics->circle) { App->renderer->Blit(BrightRound, App->physics->circle->body->GetPosition().x, App->physics->circle->body->GetPosition().y, NULL); }
 

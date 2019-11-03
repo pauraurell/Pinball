@@ -25,6 +25,9 @@ public:
 	PhysBody* kicker;
 
 	PhysBody* sensor;
+	PhysBody* sensor2;
+	PhysBody* sensor3;
+	PhysBody* sensor_cahngeSprite;
 	bool sensed;
 
 	SDL_Texture* circle;
