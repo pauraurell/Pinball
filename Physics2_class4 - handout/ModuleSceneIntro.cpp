@@ -44,11 +44,12 @@ bool ModuleSceneIntro::Start()
 	sensor_changeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
 	sensor_changeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
 
-	initialPos = new b2Vec2(10, 15);
-
 	int size = 8;
 	door = App->physics->CreateChain(1, 1, Pinball_door, size, b2_staticBody);
 
+	initialPos = new b2Vec2(10, 15);
+	outPos = new b2Vec2(300, 0);
+	
 	return ret;
 }
 
@@ -205,6 +206,13 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 	
+	if (tunel_visible) {
+		App->physics->tunelCol->body->SetTransform(b2Vec2_zero, 0);
+	}
+	else {
+		App->physics->tunelCol->body->SetTransform(*outPos, 0);
+	}
+
 	if (doorOpen > 1) {
 		door->body->SetTransform(*initialPos, 0);
 		if (doorOpen <= 1.5f) {
@@ -278,7 +286,7 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	
+	App->audio->PlayFx(hit_fx);
 	bool collided = false;
 	
 	p2List_item<PhysBody*>* c = circles.getFirst();
@@ -287,16 +295,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	p2List_item<PhysBody*>* s = App->physics->sensors.getFirst();
 	p2List_item<PhysBody*>* w = App->physics->walls.getFirst();
 
-	
-
-
 	while (c != NULL)
 	{
 		while (t != NULL && collided == false)
 		{
 			if (bodyA == c->data && bodyB == t->data)
 			{
-				App->audio->PlayFx(hit_fx);
+
 				blitTemp = 1.0f;
 				if (c->data->body->GetTransform().p.x < 4) blitTriangles = 1;
 				else blitTriangles = 2;

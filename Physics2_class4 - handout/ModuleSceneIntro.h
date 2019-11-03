@@ -49,6 +49,7 @@ public:
 	float blitTemp = 0;
 
 	b2Vec2* initialPos = nullptr;
+	b2Vec2* outPos = nullptr;
 
 	SDL_Texture*backgroundUpBall;
 
