@@ -405,16 +405,16 @@ bool ModulePhysics::Start()
 	tunel2Col = CreateChain(x, y, Pinball_Tunel_2, size, b2_staticBody);
 
 	int Pinball_Tunel_2_Interior[20] = {
-	403, 239,
-	380, 215,
-	372, 203,
-	372, 189,
-	383, 176,
-	398, 172,
-	415, 180,
-	420, 193,
-	417, 206,
-	413, 226
+	405, 231,
+	390, 218,
+	380, 201,
+	382, 188,
+	388, 181,
+	399, 178,
+	410, 182,
+	414, 194,
+	412, 204,
+	409, 219
 	};
 	size = 20;
 	tunel2Col_interior = CreateChain(x, y, Pinball_Tunel_2_Interior, size, b2_staticBody);
