@@ -114,13 +114,32 @@ update_status ModuleSceneIntro::Update()
 		else if (tunel_visible == true) { tunel_visible = false; }
 	}
 
-	if (resetPos || App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
+	if (resetPos) {
+		if (circles.getFirst() != NULL)
+		{
+			if (respawnTimer == false)
+			{
+				respawn_timer = SDL_GetTicks();
+				respawnTimer = true;
+			}
+
+			if (SDL_GetTicks() - respawn_timer > 2800) {
+				respawnTimer = false;
+				circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
+				circles.getFirst()->data->body->SetTransform(*initialPos, 0);
+				resetPos = false;
+			}
+			Lights = false;
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
 		if (circles.getFirst() != NULL)
 		{
 			circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
 			circles.getFirst()->data->body->SetTransform(*initialPos, 0);
-			Lights = false;
 			resetPos = false;
+			Lights = false;
 		}
 	}
 

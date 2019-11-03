@@ -93,6 +93,9 @@ public:
 	uint hit_circle_fx;
 	uint notCool_fx;
 
+	uint respawn_timer;
+	bool respawnTimer;
+
 	p2Point<int> ray;
 	bool ray_on;
 
