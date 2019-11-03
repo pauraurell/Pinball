@@ -114,10 +114,19 @@ update_status ModuleSceneIntro::Update()
 	if (resetPos || App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
 		if (circles.getFirst() != NULL)
 		{
-			circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
-			circles.getFirst()->data->body->SetTransform(*initialPos, 0);
+			if (respawnTimer == false)
+			{
+				respawn_timer = SDL_GetTicks();
+				respawnTimer = true;
+			}
+
+			if (SDL_GetTicks() - respawn_timer > 2800) {
+				respawnTimer = false;
+				circles.getFirst()->data->body->SetLinearVelocity(b2Vec2_zero);
+				circles.getFirst()->data->body->SetTransform(*initialPos, 0);
+				resetPos = false;
+			}
 			Lights = false;
-			resetPos = false;
 		}
 	}
 
