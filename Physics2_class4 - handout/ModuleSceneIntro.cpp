@@ -88,7 +88,6 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		
 	 	if (tunel_visible == false){tunel_visible = true;}
 		else if (tunel_visible == true) { tunel_visible = false; }
 	}

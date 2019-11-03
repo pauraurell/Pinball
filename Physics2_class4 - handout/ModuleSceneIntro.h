@@ -25,6 +25,9 @@ public:
 
 	PhysBody* kicker;
 
+	/*PhysBody* door;
+	bool closed;*/
+
 	PhysBody* sensor;
 	PhysBody* sensor2;
 	PhysBody* sensor3;
