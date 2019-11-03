@@ -36,6 +36,8 @@ public:
 
 	b2Vec2* initialPos = nullptr;
 
+	SDL_Texture*backgroundUpBall;
+
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;

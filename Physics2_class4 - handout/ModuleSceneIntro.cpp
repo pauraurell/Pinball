@@ -31,6 +31,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	hit_fx = App->audio->LoadFx("pinball/hit.ogg");
 	background = App->textures->Load("pinball/Pinball_Sritesheet.png");
+	backgroundUpBall = App->textures->Load("pinball/ElementsUpTheBall.png");
 	tunel = App->textures->Load("pinball/Pinball_Tunel.png");
 	BrightRound = App->textures->Load("pinball/Round_coll.png");
 	BrightTriangular = App->textures->Load("pinball/Bright_Triangular_collider.png");
@@ -216,6 +217,7 @@ update_status ModuleSceneIntro::Update()
 			blitTemp -= 0.1f;
 		}
 	}
+	App->renderer->Blit(backgroundUpBall, 0, 0, NULL);
 
 	return UPDATE_CONTINUE;
 }
