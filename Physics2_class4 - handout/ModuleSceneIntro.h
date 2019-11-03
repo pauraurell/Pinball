@@ -24,7 +24,7 @@ public:
 	p2List<PhysBody*> ricks;
 
 	PhysBody* kicker;
-
+	PhysBody* doorCol;
 	PhysBody* sensor;
 	PhysBody* sensor2;
 	PhysBody* sensor3;
@@ -33,6 +33,7 @@ public:
 	bool sensed;
 	bool kickerActive = false;
 	bool resetPos = false;
+	float doorTemp = 0;
 	float sensorStop = 0;
 
 	int blitTriangles = 0;
