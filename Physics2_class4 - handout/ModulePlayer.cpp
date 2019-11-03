@@ -52,8 +52,8 @@ bool ModulePlayer::Start()
 
 	int size = 16;
 
-	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody, 1.0f, 10.0f);
-	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody, 1.0f, 10.0f);
+	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody, 1.5f, 10.0f);
+	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody, 1.5f, 10.0f);
 	//kickerBody = App->physics->CreateRectangle(kickerPos.x, kickerPos.y, 25, 5, b2_dynamicBody, 0);
 	kickerSensor = App->physics->CreateRectangleSensor(kickerPos.x + 8, kickerPos.y - 7, 25, 25);
 	doorOpenCol = App->physics->CreateRectangleSensor(kickerPos.x + 8, kickerPos.y - 200, 25, 5);
@@ -106,7 +106,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 		leftJoint->EnableMotor(true);
-		leftJoint->SetMotorSpeed(-50);
+		leftJoint->SetMotorSpeed(-20);
 	}
 	else {
 		leftJoint->SetMotorSpeed(0);
@@ -115,7 +115,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
 		rightJoint->EnableMotor(true);
-		rightJoint->SetMotorSpeed(50);
+		rightJoint->SetMotorSpeed(20);
 	}
 	else {
 		rightJoint->SetMotorSpeed(0);

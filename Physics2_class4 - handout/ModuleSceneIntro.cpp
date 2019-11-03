@@ -44,7 +44,7 @@ bool ModuleSceneIntro::Start()
 	sensor3 = App->physics->CreateRectangleSensor(325, 354, 28, 28);
 	sensor_changeSprite = App->physics->CreateRectangleSensor(94, 328, 40, 28);
 	sensor_changeSprite_out = App->physics->CreateRectangleSensor(76, 730, 40, 28);
-	sensor_changeSprite2 = App->physics->CreateRectangleSensor(380, 390, 40, 28);
+	sensor_changeSprite2 = App->physics->CreateRectangleSensor(385, 360, 40, 28);
 	sensor_changeSprite2_out = App->physics->CreateRectangleSensor(410, 750, 40, 28);
 
 	int size = 8;
@@ -107,47 +107,6 @@ update_status ModuleSceneIntro::Update()
 			circles.getFirst()->data->body->SetTransform(*initialPos, 0);
 			resetPos = false;
 		}
-	}
-
-	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
-		// Pivot 0, 0
-		int rick_head[64] = {
-			14, 36,
-			42, 40,
-			40, 0,
-			75, 30,
-			88, 4,
-			94, 39,
-			111, 36,
-			104, 58,
-			107, 62,
-			117, 67,
-			109, 73,
-			110, 85,
-			106, 91,
-			109, 99,
-			103, 104,
-			100, 115,
-			106, 121,
-			103, 125,
-			98, 126,
-			95, 137,
-			83, 147,
-			67, 147,
-			53, 140,
-			46, 132,
-			34, 136,
-			38, 126,
-			23, 123,
-			30, 114,
-			10, 102,
-			29, 90,
-			0, 75,
-			30, 62
-		};
-
-		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64, b2_dynamicBody));
 	}
 
 	// Prepare for raycast ------------------------------------------------------
@@ -222,6 +181,19 @@ update_status ModuleSceneIntro::Update()
 		data_->body->SetTransform(*outPos, 0);
 		App->physics->tunelCol->body->SetTransform(b2Vec2_zero, 0);
 	}
+	else if (tunel_2_enabled) {
+		p2List_item<PhysBody*>* w = App->physics->walls.getFirst();
+		while (w != NULL)
+		{
+			w->data->body->SetTransform(*outPos, 0);
+			w = w->next;
+		}
+		PhysBody* data_;
+		App->physics->circles.at(2, data_);
+		data_->body->SetTransform(*outPos, 0);
+		App->physics->tunel2Col_interior->body->SetTransform(b2Vec2_zero, 0);
+		App->physics->tunel2Col->body->SetTransform(b2Vec2_zero, 0);
+	}
 	else {
 		p2List_item<PhysBody*>* w = App->physics->walls.getFirst();
 		
@@ -236,13 +208,6 @@ update_status ModuleSceneIntro::Update()
 		data_->body->SetTransform(*temp, 0);
 
 		App->physics->tunelCol->body->SetTransform(*outPos, 0);
-	}
-
-	if (tunel_2_enabled) {
-		App->physics->tunel2Col->body->SetTransform(b2Vec2_zero, 0);
-		App->physics->tunel2Col_interior->body->SetTransform(b2Vec2_zero, 0);
-	}
-	else {
 		App->physics->tunel2Col_interior->body->SetTransform(*outPos, 0);
 		App->physics->tunel2Col->body->SetTransform(*outPos, 0);
 	}
@@ -362,9 +327,19 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			if (bodyA == c->data && bodyB == s->data)
 			{
 				blitTemp = 1.0f;
-				if (s->data == sensor_changeSprite) tunel_visible = true;
+				if (s->data == sensor_changeSprite) { 
+					tunel_visible = true;
+					App->physics->NoGravity(c->data->body);
+					c->data->body->ApplyForceToCenter(c->data->body->GetLinearVelocity(), false);
+					sensorStop = 3;
+				}
 				if (s->data == sensor_changeSprite_out) tunel_visible = false;
-				if (s->data == sensor_changeSprite2) tunel_2_enabled = true;
+				if (s->data == sensor_changeSprite2) { 
+					tunel_2_enabled = true;
+					App->physics->NoGravity(c->data->body);
+					c->data->body->ApplyForceToCenter(c->data->body->GetLinearVelocity(), false);
+					sensorStop = 3;
+				}
 				if (s->data == sensor_changeSprite2_out) tunel_2_enabled = false;
 				if (s->data == App->player->kickerSensor) kickerActive = true;
 				else kickerActive = false;

@@ -109,7 +109,7 @@ bool ModulePhysics::Start()
 		356, 780
 	};
 	size = 20;
-	triangles.add(CreateChain(x, y, triangleRight, size, b2_staticBody, 1.1f));
+	triangles.add(CreateChain(x-1, y, triangleRight, size, b2_staticBody, 1.1f));
 
 	int leftWall[20] = {
 		48, 686,
@@ -373,10 +373,10 @@ bool ModulePhysics::Start()
 	442, 181,
 	441, 219,
 	432, 266,
-	458, 297,
+	458, 294,
 	486, 334,
 	497, 375,
-	488, 411,
+	492, 411,
 	474, 440,
 	446, 489,
 	435, 520,
