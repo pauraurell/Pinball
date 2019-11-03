@@ -54,6 +54,7 @@ bool ModuleSceneIntro::Start()
 	sensor_changeSprite2 = App->physics->CreateRectangleSensor(385, 360, 40, 28);
 	sensor_changeSprite2_out = App->physics->CreateRectangleSensor(410, 750, 40, 28);
 	sensorLights = App->physics->CreateRectangleSensor(320, 90, 120, 22);
+	sensorSkill = App->physics->CreateRectangleSensor(458, 600, 30, 22);
 
 	int size = 8;
 	door = App->physics->CreateChain(1, 1, Pinball_door, size, b2_staticBody);
@@ -91,7 +92,7 @@ update_status ModuleSceneIntro::Update()
 	App->window->SetTitle(title.GetString());
 	App->renderer->Blit(background, 0, 0, NULL);
 	if(tunel_visible)App->renderer->Blit(tunel, 0, 0, NULL);
-
+	if (Lights == true) { App->renderer->Blit(lights, 0, 0, NULL); }
 	 if (tunel_visible) {
 		 App->renderer->Blit(tunel, 0, 0, NULL);
 	 }
@@ -329,7 +330,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (tunel_2_enabled == false) { App->renderer->Blit(backgroundUpBall, 0, 0, NULL); }
 	if (tunel_2_enabled == true) { App->renderer->Blit(tube, 0, 0, NULL); }
-	if (Lights == true) { App->renderer->Blit(lights, 0, 0, NULL); }
+	
 
 	SDL_snprintf(pointsText, 10, "%d", points);
 	App->fonts->BlitText(600, 400, fontID, pointsText);

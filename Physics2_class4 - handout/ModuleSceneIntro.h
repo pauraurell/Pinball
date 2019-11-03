@@ -48,6 +48,8 @@ public:
 	PhysBody* sensor_changeSprite_out;
 	PhysBody* sensor_changeSprite2;
 	PhysBody* sensor_changeSprite2_out;
+	PhysBody* sensorSkill;
+	
 	bool sensed;
 	bool kickerActive = false;
 	bool resetPos = false;
@@ -80,7 +82,6 @@ public:
 	SDL_Texture*backgroundUpBall;
 	SDL_Texture*tube;
 	SDL_Texture*lights;
-
 
 	SDL_Texture* circle;
 	SDL_Texture* box;
