@@ -69,7 +69,7 @@ public:
 
 private:
 
-	bool debug;
+	bool debug = true;
 	b2MouseJoint* mouse_joint;
 	b2Body* ground;
 };

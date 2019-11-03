@@ -25,4 +25,6 @@ Debug functionality:
 F1 -> Show colliders.
 
 
-Diferences:
+Diferences: 
+-Our points are printed in the window title.
+-
