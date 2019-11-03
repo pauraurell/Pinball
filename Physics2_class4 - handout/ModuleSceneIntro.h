@@ -53,6 +53,9 @@ public:
 	b2Vec2* initialPos = nullptr;
 	b2Vec2* outPos = nullptr;
 
+	b2Vec2* tunel1force = nullptr;
+	b2Vec2* tunel2force = nullptr;
+
 	SDL_Texture*backgroundUpBall;
 
 	SDL_Texture* circle;

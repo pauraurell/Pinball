@@ -52,6 +52,9 @@ bool ModuleSceneIntro::Start()
 
 	initialPos = new b2Vec2(10, 15);
 	outPos = new b2Vec2(300, 0);
+
+	tunel1force = new b2Vec2(-70, -90);
+	tunel2force = new b2Vec2(30, -100);
 	
 	return ret;
 }
@@ -329,15 +332,15 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				blitTemp = 1.0f;
 				if (s->data == sensor_changeSprite) { 
 					tunel_visible = true;
-					App->physics->NoGravity(c->data->body);
-					c->data->body->ApplyForceToCenter(c->data->body->GetLinearVelocity(), false);
+					if(sensorStop == 0)	App->physics->NoGravity(c->data->body);
+					c->data->body->ApplyForceToCenter(*tunel1force, false);
 					sensorStop = 3;
 				}
 				if (s->data == sensor_changeSprite_out) tunel_visible = false;
 				if (s->data == sensor_changeSprite2) { 
 					tunel_2_enabled = true;
-					App->physics->NoGravity(c->data->body);
-					c->data->body->ApplyForceToCenter(c->data->body->GetLinearVelocity(), false);
+					if (sensorStop == 0) App->physics->NoGravity(c->data->body);
+					c->data->body->ApplyForceToCenter(*tunel2force, false);
 					sensorStop = 3;
 				}
 				if (s->data == sensor_changeSprite2_out) tunel_2_enabled = false;
