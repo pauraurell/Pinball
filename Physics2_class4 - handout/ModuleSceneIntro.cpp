@@ -216,6 +216,33 @@ update_status ModuleSceneIntro::Update()
 			blitTemp -= 0.1f;
 		}
 	}
+	if (blitCircles == 1) {
+		if (blitTemp <= 0) {
+			blitCircles = 0;
+		}
+		else {
+			App->renderer->Blit(BrightRound, 251, 153, NULL, 1.0f);
+			blitTemp -= 0.1f;
+		}
+	}
+	if (blitCircles == 2) {
+		if (blitTemp <= 0) {
+			blitCircles = 0;
+		}
+		else {
+			App->renderer->Blit(BrightRound, 361, 150, NULL, 1.0f);
+			blitTemp -= 0.1f;
+		}
+	}
+	if (blitCircles == 3) {
+		if (blitTemp <= 0) {
+			blitCircles = 0;
+		}
+		else {
+			App->renderer->Blit(BrightRound, 310, 210, NULL, 1.0f);
+			blitTemp -= 0.1f;
+		}
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -246,7 +273,11 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			if (bodyA == c->data && bodyB == c2->data)
 			{
-				App->renderer->Blit(BrightRound, c2->data->body->GetPosition().x, c2->data->body->GetPosition().y, NULL, 1.0f);
+				blitTemp = 1.0f;
+				if (c2->data == App->physics->circles.getFirst()->data) { blitCircles = 1; }
+				else if (c->data->body->GetTransform().p.x > 7 && c->data->body->GetTransform().p.y < 4.22f) { blitCircles = 2; }
+				else { blitCircles = 3; }
+				//App->renderer->Blit(BrightRound, c2->data->body->GetPosition().x, c2->data->body->GetPosition().y, NULL, 1.0f);
 				collided = true;
 			}
 			c2 = c2->next;

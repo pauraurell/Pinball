@@ -32,6 +32,7 @@ public:
 	bool sensed;
 
 	int blitTriangles = 0;
+	int blitCircles = 0;
 	float blitTemp = 0;
 
 	b2Vec2* initialPos = nullptr;
