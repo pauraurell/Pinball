@@ -377,7 +377,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2BodyType type, float restitution, int list)
+PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2BodyType type, float restitution, float gravity, int list)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -405,6 +405,7 @@ PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, b2Bo
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
 	b->SetUserData(pbody);
+	b->SetGravityScale(gravity);
 
 	if (list == 1) { walls.add(pbody); }
 	//if (list = 2) { triangles.add(pbody); }

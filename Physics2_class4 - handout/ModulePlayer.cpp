@@ -50,8 +50,8 @@ bool ModulePlayer::Start()
 
 	int size = 16;
 
-	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody, 1.0f);
-	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody, 1.0f);
+	leftLeverBody = App->physics->CreatePolygon(leftLever.x, leftLever.y, Lever, size, b2_dynamicBody, 1.0f, 10.0f);
+	rightLeverBody = App->physics->CreatePolygon(rightLever.x+80, rightLever.y, Lever2, size, b2_dynamicBody, 1.0f, 10.0f);
 	kickerBody = App->physics->CreateRectangle(kickerPos.x, kickerPos.y, 15, 40, b2_staticBody);
 	
 	//Joint left lever
