@@ -25,24 +25,24 @@ bool ModulePlayer::Start()
 	joint2 = App->physics->CreateCircle(rightLever.x+69, rightLever.y+12, 5, b2_staticBody);
 	
 	int Lever[16] = {
-			11, 4,
-			3, 17,
-			7, 21,
-			73, 45,
-			78, 45,
-			79, 42,
-			77, 39,
-			22, 7
+		12, 3,
+		20, 5,
+		84, 43,
+		84, 47,
+		78, 50,
+		8, 24,
+		4, 16,
+		7, 7
 	};
 	int Lever2[16] = {
-		-11, 4,
-		-3, 17,
-		-7, 21,
-		-73, 45,
-		-78, 45,
-		-79, 42,
-		-77, 39,
-		-22, 7
+		-12, 3,
+		-20, 5,
+		-84, 43,
+		-84, 47,
+		-78, 50,
+		-8, 24,
+		-4, 16,
+		-7, 7
 	};
 
 	int size = 16;
@@ -82,7 +82,7 @@ update_status ModulePlayer::Update()
 {
 	update_status ret = UPDATE_ERROR;
 
-	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT) {
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 		leftJoint->EnableMotor(true);
 		leftJoint->SetMotorSpeed(-50);
 	}
@@ -91,7 +91,7 @@ update_status ModulePlayer::Update()
 		leftJoint->EnableMotor(false);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) {
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
 		rightJoint->EnableMotor(true);
 		rightJoint->SetMotorSpeed(50);
 	}
