@@ -55,6 +55,7 @@ public:
 	SDL_Texture* BrightTriangular;
 	uint bonus_fx;
 	uint hit_fx;
+	uint hit_circle_fx;
 	p2Point<int> ray;
 	bool ray_on;
 

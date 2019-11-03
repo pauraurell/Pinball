@@ -357,14 +357,7 @@ bool ModulePhysics::Start()
 	size = 102;
 	CreateChain(x, y, Pinball_Tunel, size, b2_staticBody);
 
-	int Pinball_door[8] = {
-	477, 452,
-	500, 423,
-	505, 428,
-	483, 455
-	};
-	size = 8;
-	CreateChain(x, y, Pinball_door, size, b2_staticBody);
+	
 
 	return true;
 }
